@@ -1,0 +1,55 @@
+<div class="container my-5">
+  <h1 class="mb-4">Your Shopping Cart</h1>
+
+  <div *ngIf="cartItems.length === 0" class="alert alert-info">
+    Your cart is empty. <a routerLink="/home">Continue shopping</a>
+  </div>
+
+  <div *ngIf="cartItems.length > 0">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td>
+            <div class="d-flex align-items-center">
+              <img [src]="item.product.imageUrl || 'assets/images/product-placeholder.jpg'"
+                   class="img-thumbnail me-3" width="80" [alt]="item.product.name">
+              <div>
+                <h5 class="mb-0">{{item.product.name}}</h5>
+                <p class="mb-0 text-muted">{{item.product.description}}</p>
+              </div>
+            </div>
+          </td>
+          <td>${{item.product.price.toFixed(2)}}</td>
+          <td>{{item.quantity}}</td>
+          <td>${{(item.product.price * item.quantity).toFixed(2)}}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="removeItem(item.id)">Remove</button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="3" class="text-end"><strong>Total:</strong></td>
+          <td><strong>${{total.toFixed(2)}}</strong></td>
+          <td></td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-outline-danger" (click)="clearCart()">Clear Cart</button>
+      <button class="btn btn-primary" (click)="proceedToCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+.auth-container {
+  max-width: 500px;
+  margin: 3rem auto;
+}
+
+.auth-card {
+  border: none;
+  box-shadow: var(--box-shadow);
+}
+
+.auth-card .card-header {
+  background-color: var(--primary-color);
+  color: var(--white);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.25rem;
+  border: none;
+}
+
+.auth-card .card-body {
+  padding: 2rem;
+}
+
+.auth-card .form-control {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.auth-card .btn {
+  padding: 0.75rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.auth-links a {
+  color: var(--primary-color);
+  font-weight: 500;
+}

@@ -1,0 +1,143 @@
+.checkout-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.checkout-step {
+  text-align: center;
+  flex: 1;
+  position: relative;
+}
+
+.checkout-step-number {
+  width: 40px;
+  height: 40px;
+  background-color: var(--gray-200);
+  color: var(--gray-600);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem;
+  font-weight: 600;
+}
+
+.checkout-step.active .checkout-step-number {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.checkout-step-title {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.checkout-step.active .checkout-step-title {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.checkout-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  right: 0;
+  height: 2px;
+  background-color: var(--gray-200);
+  z-index: -1;
+}
+
+.checkout-step.active:not(:last-child)::after {
+  background-color: var(--primary-color);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.payment-method:hover {
+  border-color: var(--primary-color);
+}
+
+.payment-method.active {
+  border-color: var(--primary-color);
+  background-color: rgba(78, 115, 223, 0.05);
+}
+
+.payment-method-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: var(--primary-color);
+}
+
+.payment-method-details {
+  flex-grow: 1;
+}
+
+.payment-method-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.payment-method-desc {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.order-summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.order-summary-total {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.order-summary-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  margin-right: 1rem;
+}
+
+.order-summary-product {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.order-summary-product-details {
+  flex-grow: 1;
+}
+
+.order-summary-product-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.order-summary-product-price {
+  color: var(--primary-color);
+  font-weight: 600;
+}
