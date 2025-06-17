@@ -1,43 +1,134 @@
-.auth-container {
-  max-width: 500px;
-  margin: 3rem auto;
+/* Effetto pagina/cornice */
+.pera-page-frame {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.auth-card {
-  border: none;
-  box-shadow: var(--box-shadow);
-}
-
-.auth-card .card-header {
-  background-color: var(--primary-color);
-  color: var(--white);
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.25rem;
-  border: none;
-}
-
-.auth-card .card-body {
-  padding: 2rem;
-}
-
-.auth-card .form-control {
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
-}
-
-.auth-card .btn {
-  padding: 0.75rem;
-  font-weight: 500;
+.pera-paper-sheet {
   width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.auth-links {
-  text-align: center;
-  margin-top: 1.5rem;
+.pera-paper-sheet:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.auth-links a {
-  color: var(--primary-color);
+.pera-login-container {
+  padding: 2.5rem;
+}
+
+/* Elementi grafici */
+.pera-logo {
+  height: 56px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.pera-logo:hover {
+  transform: scale(1.05);
+}
+
+.pera-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+.pera-input {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.pera-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Pulsante Login con animazione */
+.pera-btn-login {
+  background-color: #3b82f6;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
   font-weight: 500;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pera-btn-login:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.pera-btn-login:active {
+  transform: translateY(0);
+}
+
+.pera-btn-login:disabled {
+  background-color: #94a3b8;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Link Registrazione minimal */
+.pera-register-link {
+  display: block;
+  text-align: center;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.pera-register-link:hover {
+  color: #3b82f6;
+  background-color: #f8fafc;
+}
+
+/* Messaggi errore */
+.pera-error-message {
+  font-size: 0.82rem;
+  color: #ef4444;
+  margin-top: 6px;
+  padding-left: 4px;
+}
+
+.pera-alert {
+  border-radius: 8px;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .pera-login-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .pera-paper-sheet {
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .pera-title {
+    font-size: 1.3rem;
+  }
 }

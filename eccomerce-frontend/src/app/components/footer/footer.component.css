@@ -1,9 +1,69 @@
-footer {
-  background-color: var(--dark-color);
-  color: var(--white);
-  box-shadow: 0 -0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+/* Effetti hover minimali */
+.pera-footer {
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
 }
 
-footer p {
-  margin-bottom: 0;
+.logo-hover {
+  transition: transform 0.3s ease;
+}
+
+.logo-hover:hover {
+  transform: translateY(-2px);
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.social-icon {
+  color: rgba(255, 255, 255, 0.97);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  color: white;
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.legal-link {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+}
+
+.legal-link:hover {
+  color: white !important;
+  text-decoration: none;
 }
