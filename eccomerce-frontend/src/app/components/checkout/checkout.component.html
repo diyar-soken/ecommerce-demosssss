@@ -1,78 +1,16 @@
-<div class="container my-5">
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header bg-primary text-white">
-          <h3 class="mb-0">Checkout</h3>
-        </div>
-        <div class="card-body">
-          <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-            <h4 class="mb-3">Shipping Information</h4>
-            <div class="mb-3">
-              <label for="shippingAddress" class="form-label">Shipping Address</label>
-              <textarea class="form-control" id="shippingAddress" rows="3"
-                        formControlName="shippingAddress"></textarea>
-              <div *ngIf="checkoutForm.get('shippingAddress')?.invalid &&
-                          checkoutForm.get('shippingAddress')?.touched"
-                   class="text-danger">
-                Shipping address is required
-              </div>
-            </div>
+<div *ngIf="cart.length > 0; else noItems">
+  <h2>Riepilogo ordine</h2>
+  <ul>
+    <li *ngFor="let item of cart">{{ item.name }} - €{{ item.price }}</li>
+  </ul>
+  <p><strong>Totale:</strong> €{{ getTotal() }}</p>
+  <button (click)="confirmOrder()">Conferma ordine</button>
+</div>
 
-            <h4 class="mb-3">Payment Method</h4>
-            <div class="form-check mb-3">
-              <input class="form-check-input" type="radio" id="creditCard"
-                     value="credit_card" formControlName="paymentMethod" checked>
-              <label class="form-check-label" for="creditCard">
-                Credit Card
-              </label>
-            </div>
-            <div class="form-check mb-3">
-              <input class="form-check-input" type="radio" id="paypal"
-                     value="paypal" formControlName="paymentMethod">
-              <label class="form-check-label" for="paypal">
-                PayPal
-              </label>
-            </div>
-            <div class="form-check mb-3">
-              <input class="form-check-input" type="radio" id="bankTransfer"
-                     value="bank_transfer" formControlName="paymentMethod">
-              <label class="form-check-label" for="bankTransfer">
-                Bank Transfer
-              </label>
-            </div>
+<ng-template #noItems>
+  <p>Il carrello è vuoto.</p>
+</ng-template>
 
-            <button type="submit" class="btn btn-primary btn-lg w-100"
-                    [disabled]="checkoutForm.invalid">
-              Place Order
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header bg-light">
-          <h4 class="mb-0">Order Summary</h4>
-        </div>
-        <div class="card-body">
-          <p>You will be able to review your order before payment.</p>
-          <hr>
-          <div class="d-flex justify-content-between">
-            <span>Subtotal</span>
-            <span>$0.00</span>
-          </div>
-          <div class="d-flex justify-content-between">
-            <span>Shipping</span>
-            <span>$0.00</span>
-          </div>
-          <hr>
-          <div class="d-flex justify-content-between fw-bold">
-            <span>Total</span>
-            <span>$0.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div *ngIf="orderConfirmed">
+  <p style="color: green"><strong>Ordine confermato! Grazie per l'acquisto.</strong></p>
 </div>

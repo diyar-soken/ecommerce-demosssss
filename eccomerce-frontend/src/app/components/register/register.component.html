@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="E-mail">
+          <input type="email" class="form-control pera-input" id="email" formControlName="email" placeholder="E-mail">
           <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="pera-error-message">
             Inserisci un E-mail valida
           </div>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <input type="password" class="form-control pera-inputl" id="confirmPassword" formControlName="confirmPassword" placeholder="Conferma password">
+          <input type="password" class="form-control pera-input" id="confirmPassword" formControlName="confirmPassword" placeholder="Conferma password">
           <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched" class="pera-error-message">
             La password non corrisponde
           </div>

@@ -2,7 +2,10 @@ package it.diyar.ecommercedemos.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.w3c.dom.stylesheets.LinkStyle;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -24,7 +27,7 @@ public class Order {
     private Double total;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Set<OrderItem> orderItems;
+    private List<OrderItem> orderItems;
 
     public Long getId() {
         return id;
@@ -58,11 +61,11 @@ public class Order {
         this.date = date;
     }
 
-    public Set<OrderItem> getOrderItems() {
+    public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(Set<OrderItem> orderItems) {
+    public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 }

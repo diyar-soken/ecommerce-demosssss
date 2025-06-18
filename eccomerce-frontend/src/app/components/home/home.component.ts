@@ -23,18 +23,21 @@ export class HomeComponent implements OnInit {
   loadProducts(): void {
     this.productService.getProducts().subscribe({
       next: (products) => {
+        console.log('✅ Prodotti ricevuti:', products);
         this.products = products;
       },
-      error: (err) => {
-        console.error('Error loading products', err);
+      error: (err: any) => {
+        console.error('❌ Errore caricamento prodotti:', err);
       }
+
     });
   }
+
 
   addToCart(productId: number): void {
     this.cartService.addToCart(productId).subscribe({
       next: () => {
-        alert('Product added to cart');
+        alert('Prodotto aggiunto al carrello!');
       },
       error: (err) => {
         console.error('Error adding to cart', err);

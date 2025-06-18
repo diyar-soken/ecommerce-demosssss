@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   total: number = 0;
+  shippingCost: number = 9
 
   constructor(
     private cartService: CartService,
@@ -43,13 +44,16 @@ export class CartComponent implements OnInit {
   removeItem(itemId: number): void {
     this.cartService.removeFromCart(itemId).subscribe({
       next: () => {
-        this.loadCart();
+        // Rimuove l’item dalla lista locale
+        this.cartItems = this.cartItems.filter(item => item.id !== itemId);
+        this.total = this.cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
       },
       error: (err) => {
-        console.error('Error removing item', err);
+        console.error('Errore nella rimozione dell\'item', err);
       }
     });
   }
+
 
   clearCart(): void {
     this.cartService.clearCart().subscribe({

@@ -1,11 +1,18 @@
 <div class="card h-100">
-  <img [src]="product.imageUrl || 'assets/images/product-placeholder.jpg'" class="card-img-top" [alt]="product.name">
+  <img
+    *ngIf="product.imageUrl"
+    [src]="product.imageUrl"
+    class="card-img-top"
+    alt="{{ product.name }}"
+  />
   <div class="card-body">
-    <h5 class="card-title">{{product.name}}</h5>
-    <p class="card-text">{{product.description}}</p>
-    <p class="card-text"><strong>${{product.price.toFixed(2)}}</strong></p>
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">{{ product.description }}</p>
+    <p class="card-text fw-bold">{{ product.price | currency:'EUR' }}</p>
   </div>
-  <div class="card-footer bg-transparent">
-    <button class="btn btn-primary w-100" (click)="addToCart.emit(product.id)">Add to Cart</button>
+  <div class="card-footer text-end">
+    <button class="btn btn-primary" (click)="addToCart.emit(product.id)">
+      Aggiungi al carrello
+    </button>
   </div>
 </div>

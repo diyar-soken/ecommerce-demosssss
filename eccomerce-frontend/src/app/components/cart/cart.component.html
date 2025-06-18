@@ -1,55 +1,72 @@
-<div class="container my-5">
-  <h1 class="mb-4">Your Shopping Cart</h1>
+<div class="cart-wrapper container py-5">
+  <h1 class="mb-5 text-center fw-bold">🛒 Carrello</h1>
 
-  <div *ngIf="cartItems.length === 0" class="alert alert-info">
-    Your cart is empty. <a routerLink="/home">Continue shopping</a>
+  <!-- Carrello vuoto -->
+  <div *ngIf="cartItems.length === 0" class="empty-cart text-center">
+    <p class="fs-5">Il tuo carrello è vuoto.</p>
+    <a routerLink="/home" class="btn btn-dark mt-3">Scopri i prodotti</a>
   </div>
 
-  <div *ngIf="cartItems.length > 0">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of cartItems">
-          <td>
-            <div class="d-flex align-items-center">
-              <img [src]="item.product.imageUrl || 'assets/images/product-placeholder.jpg'"
-                   class="img-thumbnail me-3" width="80" [alt]="item.product.name">
-              <div>
-                <h5 class="mb-0">{{item.product.name}}</h5>
-                <p class="mb-0 text-muted">{{item.product.description}}</p>
-              </div>
-            </div>
-          </td>
-          <td>${{item.product.price.toFixed(2)}}</td>
-          <td>{{item.quantity}}</td>
-          <td>${{(item.product.price * item.quantity).toFixed(2)}}</td>
-          <td>
-            <button class="btn btn-danger btn-sm" (click)="removeItem(item.id)">Remove</button>
-          </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <td colspan="3" class="text-end"><strong>Total:</strong></td>
-          <td><strong>${{total.toFixed(2)}}</strong></td>
-          <td></td>
-        </tr>
-        </tfoot>
-      </table>
+  <!-- Carrello pieno -->
+  <div *ngIf="cartItems.length > 0" class="row gx-5 gy-4">
+
+    <!-- Lista prodotti -->
+    <div class="col-lg-7">
+      <div class="card border-0 shadow-sm p-4">
+        <h4 class="fw-semibold mb-4 border-bottom pb-2">I tuoi prodotti</h4>
+        <div *ngFor="let item of cartItems" class="product-item d-flex justify-content-between align-items-center py-3 border-bottom">
+          <div class="details">
+            <h5 class="fw-bold mb-1">{{ item.product.name }}</h5>
+            <p class="text-muted mb-0">Quantità: {{ item.quantity }}</p>
+          </div>
+          <div class="text-end">
+            <div class="price fw-semibold mb-2">€{{ (item.product.price * item.quantity).toFixed(2) }}</div>
+            <button class="btn btn-outline-danger btn-sm" (click)="removeItem(item.id)">Rimuovi</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="d-flex justify-content-between mt-4">
-      <button class="btn btn-outline-danger" (click)="clearCart()">Clear Cart</button>
-      <button class="btn btn-primary" (click)="proceedToCheckout()">Proceed to Checkout</button>
+    <!-- Riepilogo ordine -->
+    <div class="col-lg-5">
+      <div class="card border-0 shadow p-4">
+        <h4 class="fw-semibold mb-4 border-bottom pb-2">Riepilogo ordine</h4>
+
+        <div class="d-flex justify-content-between mb-2">
+          <span>Prodotti:</span>
+          <strong>€{{ total.toFixed(2) }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Spedizione:</span>
+          <strong>€{{ shippingCost.toFixed(2) }}</strong>
+        </div>
+        <hr class="my-3">
+        <div class="d-flex justify-content-between fs-5 fw-bold mb-4">
+          <span>Totale:</span>
+          <span>€{{ (total + shippingCost).toFixed(2) }}</span>
+        </div>
+
+        <!-- Form spedizione -->
+        <form (submit)="proceedToCheckout()" class="needs-validation" novalidate>
+          <h6 class="mb-3">📦 Dati di spedizione</h6>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="address" placeholder="Via Roma 12" required>
+            <label for="address">Indirizzo</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="city" placeholder="Milano" required>
+            <label for="city">Città</label>
+          </div>
+          <div class="form-floating mb-4">
+            <input type="text" class="form-control" id="zip" placeholder="20100" required>
+            <label for="zip">CAP</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2 fs-6">✅ Conferma ordine</button>
+        </form>
+
+        <button class="btn btn-outline-secondary w-100 mt-3" (click)="clearCart()">🗑️ Svuota carrello</button>
+      </div>
     </div>
   </div>
 </div>

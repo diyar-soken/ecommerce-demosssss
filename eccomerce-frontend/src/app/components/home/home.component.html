@@ -1,8 +1,16 @@
 <div class="container my-5">
-  <h1 class="mb-4">Our Products</h1>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <h2 class="mb-4">I nostri prodotti</h2>
+
+  <div *ngIf="products.length === 0">
+    <p>Nessun prodotto disponibile al momento.</p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="products.length > 0">
     <div class="col" *ngFor="let product of products">
-      <app-product-card [product]="product" (addToCart)="addToCart(product.id)"></app-product-card>
+      <app-product-card
+        [product]="product"
+        (addToCart)="addToCart(product.id)">
+      </app-product-card>
     </div>
   </div>
 </div>
