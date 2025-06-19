@@ -1,16 +1,120 @@
-<div *ngIf="cart.length > 0; else noItems">
-  <h2>Riepilogo ordine</h2>
-  <ul>
-    <li *ngFor="let item of cart">{{ item.name }} - €{{ item.price }}</li>
-  </ul>
-  <p><strong>Totale:</strong> €{{ getTotal() }}</p>
-  <button (click)="confirmOrder()">Conferma ordine</button>
-</div>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      
+      <!-- Messaggio di errore -->
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
 
-<ng-template #noItems>
-  <p>Il carrello è vuoto.</p>
-</ng-template>
+      <!-- Carrello con prodotti -->
+      <div *ngIf="cartItems.length > 0 && !orderConfirmed" class="card">
+        <div class="card-header">
+          <h2 class="mb-0">Riepilogo Ordine</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Prodotto</th>
+                  <th>Quantità</th>
+                  <th>Prezzo Unitario</th>
+                  <th>Subtotale</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of cartItems">
+                  <td>{{ item.product?.name || item.productName }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>€{{ (item.product?.price || item.productPrice || 0).toFixed(2) }}</td>
+                  <td>€{{ ((item.product?.price || item.productPrice || 0) * item.quantity).toFixed(2) }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="table-active">
+                  <th colspan="3">Totale:</th>
+                  <th>€{{ getTotal().toFixed(2) }}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          
+          <div class="d-flex justify-content-between mt-4">
+            <button 
+              class="btn btn-secondary" 
+              (click)="continueShopping()"
+              [disabled]="isLoading">
+              Continua Shopping
+            </button>
+            <button 
+              class="btn btn-success btn-lg" 
+              (click)="confirmOrder()"
+              [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+              {{ isLoading ? 'Elaborazione...' : 'Conferma Ordine' }}
+            </button>
+          </div>
+        </div>
+      </div>
 
-<div *ngIf="orderConfirmed">
-  <p style="color: green"><strong>Ordine confermato! Grazie per l'acquisto.</strong></p>
+      <!-- Carrello vuoto -->
+      <div *ngIf="cartItems.length === 0 && !orderConfirmed" class="text-center">
+        <div class="card">
+          <div class="card-body">
+            <h3>Il carrello è vuoto</h3>
+            <p class="text-muted">Aggiungi alcuni prodotti al carrello per procedere con l'ordine.</p>
+            <button class="btn btn-primary" (click)="continueShopping()">
+              Vai allo Shopping
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ordine confermato -->
+      <div *ngIf="orderConfirmed && confirmedOrder" class="text-center">
+        <div class="card border-success">
+          <div class="card-header bg-success text-white">
+            <h2 class="mb-0">
+              <i class="fas fa-check-circle me-2"></i>
+              Ordine Confermato!
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-success">
+              <h4>Grazie per il tuo acquisto!</h4>
+              <p class="mb-0">Il tuo ordine #{{ confirmedOrder.id }} è stato elaborato con successo.</p>
+            </div>
+            
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <h5>Dettagli Ordine:</h5>
+                <p><strong>Numero Ordine:</strong> #{{ confirmedOrder.id }}</p>
+                <p><strong>Data:</strong> {{ confirmedOrder.date | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p><strong>Totale:</strong> €{{ confirmedOrder.total.toFixed(2) }}</p>
+              </div>
+              <div class="col-md-6">
+                <h5>Prodotti Ordinati:</h5>
+                <ul class="list-unstyled">
+                  <li *ngFor="let item of confirmedOrder.items">
+                    {{ item.productName }} (x{{ item.quantity }})
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-center gap-3 mt-4">
+              <button class="btn btn-primary" (click)="goToOrders()">
+                Visualizza I Miei Ordini
+              </button>
+              <button class="btn btn-outline-primary" (click)="continueShopping()">
+                Continua Shopping
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

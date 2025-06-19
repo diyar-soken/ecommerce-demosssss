@@ -12,6 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:4200")
                 .allowedOrigins("http://localhost:8080")
                 .allowedMethods("*")
+                .allowedMethods("**")
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization"); // Aggiungi se usi JWT
     }

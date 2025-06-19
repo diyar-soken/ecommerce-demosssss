@@ -1,15 +1,196 @@
-<div class="container my-5">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Welcome to our E-Commerce Store</h1>
-      <p class="lead">Discover amazing products at great prices.</p>
-      <div class="d-grid gap-2 d-md-flex">
-        <a routerLink="/login" class="btn btn-primary btn-lg me-md-2">Login</a>
-        <a routerLink="/register" class="btn btn-outline-secondary btn-lg">Register</a>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <img src="assets/images/landing.jpg" alt="E-Commerce" class="img-fluid rounded">
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-background">
+    <div class="gradient-overlay"></div>
+    <div class="floating-elements">
+      <div class="floating-circle circle-1"></div>
+      <div class="floating-circle circle-2"></div>
+      <div class="floating-circle circle-3"></div>
     </div>
   </div>
-</div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-6">
+          <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="hero-title">
+              Pera Diverso.
+              <span class="gradient-text">Scegli Pear.</span>
+            </h1>
+            <p class="hero-subtitle">
+              Innovazione che ispira. Tecnologia che emoziona.
+              Scopri l'ecosistema Pear che ridefinisce il possibile.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary-custom magic-button"
+                      (click)="scrollToProducts()"
+                      (mouseenter)="triggerMagicEffect($event)"
+                      #magicButton>
+                <span>Scopri la Magia ✨</span>
+              </button>
+              <button class="btn btn-outline-custom" routerLink="/home">
+                <span>Entra nell'Ecosistema</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="section-title">L'Esperienza Pear</h2>
+      <p class="section-subtitle">
+        Ogni dettaglio è pensato per ispirare e stupire
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-magic"></i>
+          </div>
+          <h3 class="feature-title">Design Iconico</h3>
+          <p class="feature-description">
+            Ogni prodotto Pear è un capolavoro di design e ingegneria
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="feature-title">Prestazioni Rivoluzionarie</h3>
+          <p class="feature-description">
+            Chip proprietari Pear per un'esperienza senza compromessi
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3 class="feature-title">Sostenibilità</h3>
+          <p class="feature-description">
+            Impegno per l'ambiente con materiali riciclati e energia pulita
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products Showcase Section -->
+<section class="products-showcase" id="products">
+  <div class="container-fluid">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="section-title">L'Ecosistema Pear</h2>
+      <p class="section-subtitle">
+        Prodotti che si integrano perfettamente nella tua vita
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card"
+           *ngFor="let product of products; let i = index"
+           data-aos="fade-up"
+           [attr.data-aos-delay]="i * 100"
+           (click)="viewProduct(product)">
+        <div class="product-image-container">
+          <img [src]="product.imageUrl || getPlaceholderImage()"
+               [alt]="product.name"
+               class="product-image"
+               (error)="onImageError($event)">
+          <div class="product-overlay">
+            <button class="btn btn-add-to-cart" (click)="addToCart(product.id, $event)">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Aggiungi al Carrello</span>
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="product-description">{{ product.description }}</p>
+          <div class="product-price">€{{ product.price.toFixed(2) }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5" data-aos="fade-up">
+      <button class="btn btn-primary-custom" routerLink="/home">
+        <span>Vedi Tutti i Prodotti</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card">
+          <div class="stat-number" data-count="1000">0</div>
+          <div class="stat-label">Clienti Soddisfatti</div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card">
+          <div class="stat-number" data-count="500">0</div>
+          <div class="stat-label">Prodotti Disponibili</div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-card">
+          <div class="stat-number" data-count="50">0</div>
+          <div class="stat-label">Città Raggiunte</div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="stat-card">
+          <div class="stat-number" data-count="99">0</div>
+          <div class="stat-label">% Soddisfazione</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content text-center" data-aos="fade-up">
+      <h2 class="cta-title">Benvenuto nell'Era Pear</h2>
+      <p class="cta-subtitle">
+        Unisciti alla rivoluzione tecnologica che sta cambiando il mondo
+      </p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary-custom" routerLink="/auth/register">
+          <span>Inizia il Viaggio</span>
+          <i class="fas fa-rocket"></i>
+        </button>
+        <button class="btn btn-outline-custom" routerLink="/auth/login">
+          <span>Accedi al Futuro</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

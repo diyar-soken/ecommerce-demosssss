@@ -94,7 +94,9 @@ public class CheckoutService {
 
     private OrderItemDTO convertToOrderItemDto(OrderItem orderItem) {
         OrderItemDTO dto = new OrderItemDTO();
-        dto.setProduct(modelMapper.map(orderItem.getProduct(), ProductDTO.class));
+        dto.setId(orderItem.getId());
+        dto.setProductId(orderItem.getProduct().getId());
+        dto.setProductName(orderItem.getProduct().getName());
         dto.setQuantity(orderItem.getQuantity());
         dto.setPrice(orderItem.getPrice());
         return dto;

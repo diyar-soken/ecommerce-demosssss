@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -35,12 +37,21 @@ export class HomeComponent implements OnInit {
 
 
   addToCart(productId: number): void {
-    this.cartService.addToCart(productId).subscribe({
+    // Trova il prodotto per ottenere le informazioni
+    const product = this.products.find(p => p.id === productId);
+    
+    this.cartService.addToCart(
+      productId,
+      product?.name,
+      product?.price,
+      product?.imageUrl
+    ).subscribe({
       next: () => {
-        alert('Prodotto aggiunto al carrello!');
+        this.toastService.success(`✅ ${product?.name || 'Prodotto'} aggiunto al carrello! 🛒`, 4000);
       },
       error: (err) => {
-        console.error('Error adding to cart', err);
+        console.error('Errore aggiunta al carrello:', err);
+        this.toastService.error('Errore nell\'aggiunta al carrello');
       }
     });
   }

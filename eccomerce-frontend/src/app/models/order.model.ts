@@ -1,7 +1,7 @@
-import { Product } from './product.model';
-
 export interface OrderItem {
-  product: Product;
+  id: number;
+  productId: number;
+  productName: string;
   quantity: number;
   price: number;
 }

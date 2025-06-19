@@ -16,6 +16,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { OrdersComponent } from './components/orders/orders.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { AuthGuard } from './guards/auth.guard';
     ProductCardComponent,
     ProductListComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrdersComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

@@ -40,7 +40,6 @@ public class CartController {
     }
 
     @DeleteMapping("/remove/{itemId}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> removeFromCart(@PathVariable Long itemId, Authentication authentication) {
         cartService.removeFromCart(authentication.getName(), itemId);
         return ResponseEntity.ok().build();
