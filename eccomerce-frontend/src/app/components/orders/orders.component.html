@@ -1,0 +1,74 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4">I Miei Ordini</h2>
+
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Caricamento...</span>
+        </div>
+        <p class="mt-2">Caricamento ordini...</p>
+      </div>
+
+      <!-- Messaggio di errore -->
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Nessun ordine -->
+      <div *ngIf="!isLoading && orders.length === 0 && !errorMessage" class="text-center">
+        <div class="card">
+          <div class="card-body">
+            <h4>Nessun ordine trovato</h4>
+            <p class="text-muted">Non hai ancora effettuato nessun ordine.</p>
+            <a routerLink="/home" class="btn btn-primary">Inizia a fare shopping</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista ordini -->
+      <div *ngIf="!isLoading && orders.length > 0">
+        <div class="row">
+          <div class="col-md-6 mb-4" *ngFor="let order of orders">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Ordine #{{ order.id }}</h5>
+                <span class="badge bg-success">Completato</span>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <strong>Data:</strong><br>
+                    <small>{{ order.date | date:'dd/MM/yyyy HH:mm' }}</small>
+                  </div>
+                  <div class="col-6 text-end">
+                    <strong>Totale:</strong><br>
+                    <span class="h5 text-success">€{{ order.total.toFixed(2) }}</span>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <strong>Prodotti:</strong>
+                  <ul class="list-unstyled mt-2">
+                    <li *ngFor="let item of order.items" class="d-flex justify-content-between">
+                      <span>{{ item.productName }}</span>
+                      <span>{{ item.quantity }}x €{{ item.price.toFixed(2) }}</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                  <small class="text-muted">{{ order.items.length }} prodotto(i)</small>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Dettagli
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
