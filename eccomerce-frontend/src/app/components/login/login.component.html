@@ -12,7 +12,9 @@
   <div class="pera-paper-sheet animate__animated animate__fadeIn">
     <div class="pera-login-container">
       <div class="text-center mb-4">
-        <img src="./././assets/images/logo-nero.png" alt="PeraPhone" class="pera-logo animate__animated animate__fadeInDown">
+        <img [src]="isDarkMode ? 'assets/images/logo-bianco.png' : 'assets/images/logo-nero.png'"
+             alt="PeraPhone"
+             class="pera-logo animate__animated animate__fadeInDown">
         <h2 class="pera-title mt-3">Accedi al tuo ID Pera</h2>
       </div>
 

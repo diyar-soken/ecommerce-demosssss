@@ -15,7 +15,7 @@
         <div class="col-lg-6">
           <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="hero-title">
-              Pera Diverso.
+              Pensa Diverso.
               <span class="gradient-text">Scegli Pear.</span>
             </h1>
             <p class="hero-subtitle">
@@ -23,11 +23,9 @@
               Scopri l'ecosistema Pear che ridefinisce il possibile.
             </p>
             <div class="hero-buttons">
-              <button class="btn btn-primary-custom magic-button"
-                      (click)="scrollToProducts()"
-                      (mouseenter)="triggerMagicEffect($event)"
-                      #magicButton>
-                <span>Scopri la Magia ✨</span>
+              <button class="btn btn-primary-custom" (click)="scrollToProducts()">
+                <span>Scopri la Magia</span>
+                <i class="fas fa-magic"></i>
               </button>
               <button class="btn btn-outline-custom" routerLink="/home">
                 <span>Entra nell'Ecosistema</span>
@@ -37,6 +35,15 @@
         </div>
         <div class="col-lg-6">
           <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+            <div class="product-showcase">
+              <div class="showcase-item" *ngFor="let product of featuredProducts; let i = index"
+                   [style.animation-delay.s]="i * 0.2">
+                <img [src]="product.imageUrl || getPlaceholderImage()"
+                     [alt]="product.name"
+                     class="showcase-image"
+                     (error)="onImageError($event)">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -169,27 +176,6 @@
           <div class="stat-number" data-count="99">0</div>
           <div class="stat-label">% Soddisfazione</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-content text-center" data-aos="fade-up">
-      <h2 class="cta-title">Benvenuto nell'Era Pear</h2>
-      <p class="cta-subtitle">
-        Unisciti alla rivoluzione tecnologica che sta cambiando il mondo
-      </p>
-      <div class="cta-buttons">
-        <button class="btn btn-primary-custom" routerLink="/auth/register">
-          <span>Inizia il Viaggio</span>
-          <i class="fas fa-rocket"></i>
-        </button>
-        <button class="btn btn-outline-custom" routerLink="/auth/login">
-          <span>Accedi al Futuro</span>
-        </button>
       </div>
     </div>
   </div>

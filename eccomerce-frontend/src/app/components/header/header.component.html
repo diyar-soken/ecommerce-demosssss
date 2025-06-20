@@ -1,57 +1,59 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container">
-    <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center" routerLink="/">
-      <img src="../../assets/images/logo.png" alt="Logo" width="20px" height="auto" class="pear-logo me-2">
-      <span class="fw-bold">Pear</span>
+      <img [src]="isDarkMode ? logoDarkPath : logoLightPath" alt="Logo" style="height: 40px;">
+      <span class="brand-text">Pear</span>
     </a>
 
-    <!-- Toggle per mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Link e contenuti -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Sinistra -->
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link position-relative" routerLink="/cart">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+      <ul class="navbar-nav nav-links">
+        <li class="nav-item"><a routerLink="/home" routerLinkActive="active" class="nav-link">Home</a></li>
+        <li class="nav-item position-relative">
+          <a routerLink="/cart" class="nav-link cart-link">
             Carrello
-            <span *ngIf="cartCount > 0" class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-primary">
-    {{ cartCount }}
-  </span>
+            <span *ngIf="cartCount > 0" class="badge-counter">{{ cartCount }}</span>
           </a>
         </li>
+        <li class="nav-item"><a routerLink="/orders" routerLinkActive="active" class="nav-link" *ngIf="authService.isLoggedIn()">I Miei Ordini</a></li>
+      </ul>
+
+      <ul class="navbar-nav user-actions">
+        <!-- Se utente loggato -->
+        <li class="nav-item greeting" *ngIf="authService.isLoggedIn(); else guestTemplate">
+          Ciao, {{ authService.getUser()?.name }}
+        </li>
         <li class="nav-item" *ngIf="authService.isLoggedIn()">
-          <a class="nav-link" routerLink="/orders" routerLinkActive="active">I Miei Ordini</a>
+          <button class="btn btn-outline-primary btn-sm logout-btn" (click)="logout()">Esci</button>
         </li>
-      </ul>
-
-      <!-- Destra: autenticazione -->
-      <ul class="navbar-nav align-items-center" *ngIf="authService.isLoggedIn(); else guestLinks">
-        <li class="nav-item me-2">
-          <span class="nav-link">Ciao, {{ authService.getUser()?.name }}</span>
-        </li>
+        <!-- Pulsante toggle modalità -->
         <li class="nav-item">
-          <button class="btn btn-outline-light btn-sm" (click)="logout()">Esci</button>
+          <button (click)="toggleTheme()" class="btn btn-outline-primary ms-3">
+            {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+          </button>
         </li>
-      </ul>
 
-      <!-- Ospite -->
-      <ng-template #guestLinks>
-        <ul class="navbar-nav">
+        <!-- Se ospite -->
+        <ng-template #guestTemplate>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">Accedi</a>
+            <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/register" routerLinkActive="active">Registrati</a>
+            <a routerLink="/register" routerLinkActive="active" class="nav-link">Registrati</a>
           </li>
-        </ul>
-      </ng-template>
+        </ng-template>
+      </ul>
     </div>
   </div>
 </nav>

@@ -16,6 +16,13 @@ export class LoginComponent {
   errorMessage: string = '';
   returnUrl: string = '/home';
 
+  isDarkMode: boolean = false;
+
+  ngOnInit(): void {
+    this.isDarkMode = localStorage.getItem('theme') === 'dark';
+  }
+
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -28,7 +35,7 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
-    
+
     // Ottieni l'URL di ritorno dai query parameters
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
@@ -44,7 +51,7 @@ export class LoginComponent {
             name: response.name,
             email: response.email
           }));
-          
+
           // Sincronizza il carrello locale con il server
           this.cartService.syncCartAfterLogin().subscribe({
             next: () => {
