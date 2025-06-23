@@ -34,7 +34,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   dots: Dot[] = []
   pearLogoDots: PearDot[] = [
-    { x: 50, y: 35 },
+    { x: 67, y: 23 },
     { x: 48, y: 38 },
     { x: 52, y: 38 },
     { x: 46, y: 41 },
@@ -65,13 +65,13 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       title: "LIQUID",
       subtitle: "RETINA",
       desc: "13.6-inch display with unprecedented color accuracy and brightness.",
-      image: "/assets/images/macbook-display.png",
+      image: "../assets/images/macbook-display.png",
     },
     {
       title: "ULTRA",
       subtitle: "PORTABLE",
       desc: "Impossibly thin design that doesn't compromise on performance.",
-      image: "/assets/images/macbook-side.png",
+      image: "../assets/images/macbook-side.jpg",
     },
   ]
 
@@ -86,11 +86,11 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   galleryItems = [
     { src: "/assets/images/macbook-hero.png", title: "PearBook Air" },
-    { src: "/assets/images/macbook-side.png", title: "Ultra Portable" },
+    { src: "../assets/images/macbook-side.png", title: "Ultra Portable" },
     { src: "/assets/images/ipad-pro.png", title: "PearPad Pro" },
     { src: "/assets/images/iphone-15.png", title: "PearPhone" },
     { src: "/assets/images/macbook-display.png", title: "Liquid Retina" },
-    { src: "/assets/images/m2-chip.png", title: "P1 Neural Engine" },
+    { src: "../assets/images/p2-ultra.png", title: "P1 Neural Engine" },
   ]
 
   footerLinks = {
@@ -124,7 +124,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private generateDots() {
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 110; i++) {
       this.dots.push({
         id: i,
         x: Math.random() * 100,
