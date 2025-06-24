@@ -13,12 +13,6 @@
 
   <!-- Hero Section -->
   <section #heroSection id="hero" class="hero-section">
-    <!-- Top Navigation -->
-    <div class="top-nav">
-      <div class="nav-brand">
-      </div>
-    </div>
-
     <!-- Clock Widget -->
     <div class="clock-widget">
       <div class="clock-face">
@@ -64,9 +58,10 @@
         <div
           *ngFor="let dot of pearLogoDots; let i = index"
           class="pear-dot"
-          [style.left.%]="dot.x - 50"
-          [style.top.%]="dot.y - 50"
-          [style.animation-delay.ms]="1200 + (i * 100)">
+          [style.left.%]="dot.x"
+          [style.top.%]="dot.y"
+          [style.animation-delay.ms]="800 + (i * 15)"
+          [style.z-index]="100 - i">
         </div>
       </div>
     </div>
@@ -122,6 +117,27 @@
           <span class="tech-subtitle">SPECIFICATIONS</span>
         </h2>
 
+        <!-- Current Product Info -->
+        <div class="current-product-info">
+          <h3 class="product-name">{{ currentProduct.name }}</h3>
+          <p class="product-subtitle">{{ currentProduct.subtitle }}</p>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="tech-navigation">
+          <button class="nav-btn prev-btn" (click)="prevProduct()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+
+          <button class="nav-btn next-btn" (click)="nextProduct()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+
         <div class="tech-grid">
           <div class="tech-specs">
             <div
@@ -134,7 +150,7 @@
           </div>
 
           <div class="tech-image scale-in">
-            <img src="../assets/images/macbook-orient.jpg" alt="P1 Chip" />
+            <img [src]="currentProduct.image" [alt]="currentProduct.name" />
             <div class="tech-glow"></div>
           </div>
         </div>
@@ -157,8 +173,38 @@
           [style.animation-delay.ms]="i * 100">
           <div class="gallery-image">
             <img [src]="item.src" [alt]="item.title" />
-            <div class="gallery-overlay"></div>
+
+            <!-- Static Label -->
             <div class="gallery-label">{{ item.title }}</div>
+
+            <!-- Hover Overlay with Product Info -->
+            <div class="gallery-hover-overlay">
+              <div class="product-info">
+                <h3 class="product-title">{{ item.title }}</h3>
+                <p class="product-subtitle">{{ item.subtitle }}</p>
+                <p class="product-description">{{ item.description }}</p>
+                <div class="product-price">${{ item.price }}</div>
+
+                <div class="product-actions">
+                  <button
+                    class="btn-add-to-cart"
+                    (click)="addToCart(item)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+
+                  <button class="btn-quick-view">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    Quick View
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

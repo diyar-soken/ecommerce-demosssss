@@ -1,16 +1,39 @@
-<div class="container my-5">
-  <h2 class="mb-4">I nostri prodotti</h2>
-
-  <div *ngIf="products.length === 0">
-    <p>Nessun prodotto disponibile al momento.</p>
+<div class="products-wrapper">
+  <!-- Header Section -->
+  <div class="hero-section">
+    <div class="container">
+      <div class="hero-content text-center">
+        <h1 class="hero-title">I nostri prodotti</h1>
+        <p class="hero-subtitle">Scopri la nostra selezione di prodotti di qualità</p>
+        <div class="hero-decoration">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="products.length > 0">
-    <div class="col" *ngFor="let product of products">
-      <app-product-card
-        [product]="product"
-        (addToCart)="addToCart(product.id)">
-      </app-product-card>
+  <!-- Products Section -->
+  <div class="container products-container">
+    
+    <!-- No Products State -->
+    <div *ngIf="products.length === 0" class="no-products-state">
+      <div class="text-center">
+        <i class="fas fa-box-open fa-4x text-muted mb-4"></i>
+        <h3 class="mb-3">Nessun prodotto disponibile</h3>
+        <p class="text-muted">I nostri prodotti saranno presto disponibili!</p>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" *ngIf="products.length > 0">
+      <div class="product-card-wrapper" *ngFor="let product of products; trackBy: trackByProductId">
+        <app-product-card
+          [product]="product"
+          (addToCart)="addToCart(product.id)">
+        </app-product-card>
+      </div>
     </div>
   </div>
 </div>

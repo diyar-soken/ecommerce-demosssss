@@ -55,4 +55,9 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  // Track by function per migliorare le performance della lista
+  trackByProductId(index: number, product: Product): number {
+    return product.id;
+  }
 }

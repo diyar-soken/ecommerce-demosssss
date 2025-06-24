@@ -3,8 +3,14 @@
 
   <!-- Carrello vuoto -->
   <div *ngIf="cartItems.length === 0" class="empty-cart text-center">
+    <div class="mb-4">
+      <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+    </div>
     <p class="fs-5">Il tuo carrello è vuoto.</p>
-    <a routerLink="/home" class="btn btn-dark mt-3">Scopri i prodotti</a>
+    <p class="text-muted mb-4">Aggiungi alcuni prodotti per iniziare!</p>
+    <a routerLink="/home" class="btn btn-dark mt-3">
+      <i class="fas fa-search me-2"></i>Scopri i prodotti
+    </a>
   </div>
 
   <!-- Carrello pieno -->
@@ -13,7 +19,9 @@
     <!-- Lista prodotti -->
     <div class="col-lg-7">
       <div class="card border-0 shadow-sm p-4">
-        <h4 class="fw-semibold mb-4 border-bottom pb-2">I tuoi prodotti</h4>
+        <h4 class="fw-semibold mb-4 border-bottom pb-2">
+          <i class="fas fa-shopping-bag me-2"></i>I tuoi prodotti
+        </h4>
         <div *ngFor="let item of cartItems" class="product-item d-flex justify-content-between align-items-center py-3 border-bottom">
           <div class="d-flex align-items-center">
             <img 
@@ -39,7 +47,9 @@
     <!-- Riepilogo ordine -->
     <div class="col-lg-5">
       <div class="card border-0 shadow p-4">
-        <h4 class="fw-semibold mb-4 border-bottom pb-2">Riepilogo ordine</h4>
+        <h4 class="fw-semibold mb-4 border-bottom pb-2">
+          <i class="fas fa-receipt me-2"></i>Riepilogo ordine
+        </h4>
 
         <div class="d-flex justify-content-between mb-2">
           <span>Prodotti:</span>
@@ -57,7 +67,9 @@
 
         <!-- Form spedizione -->
         <form (submit)="proceedToCheckout()" class="needs-validation" novalidate>
-          <h6 class="mb-3">📦 Dati di spedizione</h6>
+          <h6 class="mb-3">
+            <i class="fas fa-truck me-2"></i>Dati di spedizione
+          </h6>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="address" placeholder="Via Roma 12" required>
             <label for="address">Indirizzo</label>
@@ -72,12 +84,18 @@
           </div>
 
           <button type="submit" class="btn btn-primary w-100 py-2 fs-6">
-            <span *ngIf="isLoggedIn()">✅ Conferma ordine</span>
-            <span *ngIf="!isLoggedIn()">🔐 Accedi per ordinare</span>
+            <span *ngIf="isLoggedIn()">
+              <i class="fas fa-check-circle me-2"></i>Conferma ordine
+            </span>
+            <span *ngIf="!isLoggedIn()">
+              <i class="fas fa-lock me-2"></i>Accedi per ordinare
+            </span>
           </button>
         </form>
 
-        <button class="btn btn-outline-secondary w-100 mt-3" (click)="clearCart()">🗑️ Svuota carrello</button>
+        <button class="btn btn-outline-secondary w-100 mt-3" (click)="clearCart()">
+          <i class="fas fa-trash me-2"></i>Svuota carrello
+        </button>
       </div>
     </div>
   </div>

@@ -1,18 +1,30 @@
 <div class="card h-100">
-  <img
-    *ngIf="product.imageUrl"
-    [src]="product.imageUrl"
-    class="card-img-top"
-    alt="{{ product.name }}"
-  />
+  <div class="card-img-container">
+    <img
+      *ngIf="product.imageUrl"
+      [src]="product.imageUrl"
+      class="card-img-top"
+      alt="{{ product.name }}"
+    />
+    <div *ngIf="!product.imageUrl" class="placeholder-image">
+      <i class="fas fa-image fa-3x text-muted"></i>
+    </div>
+    <div class="card-overlay">
+      <div class="quick-view-btn">
+        <i class="fas fa-eye"></i>
+      </div>
+    </div>
+  </div>
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <p class="card-text">{{ product.description }}</p>
-    <p class="card-text fw-bold">{{ product.price | currency:'EUR' }}</p>
+    <div class="price-container">
+      <p class="card-text fw-bold price-tag">{{ product.price | currency:'EUR' }}</p>
+    </div>
   </div>
   <div class="card-footer text-end">
-    <button class="btn btn-primary" (click)="addToCart.emit(product.id)">
-      Aggiungi al carrello
+    <button class="btn btn-primary add-to-cart-btn" (click)="addToCart.emit(product.id)">
+      <i class="fas fa-cart-plus me-2"></i>Aggiungi al carrello
     </button>
   </div>
 </div>

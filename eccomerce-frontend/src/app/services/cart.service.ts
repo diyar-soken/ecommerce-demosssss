@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { CartItem } from '../models/cart.model';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
@@ -36,7 +37,12 @@ export class CartService {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      return this.http.post<CartItem>(`${this.apiUrl}/add/${productId}`, {}, { headers });
+      return this.http.post<CartItem>(`${this.apiUrl}/add/${productId}`, {}, { headers }).pipe(
+        tap(() => {
+          // Aggiorna il contatore dopo aver aggiunto al server
+          this.loadCartCount();
+        })
+      );
     } else {
       return this.addToLocalCart(productId, productName, productPrice, productImage);
     }

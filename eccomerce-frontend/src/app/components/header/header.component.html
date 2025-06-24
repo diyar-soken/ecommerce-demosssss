@@ -21,8 +21,14 @@
         <li class="nav-item"><a routerLink="/home" routerLinkActive="active" class="nav-link">Home</a></li>
         <li class="nav-item position-relative">
           <a routerLink="/cart" class="nav-link cart-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="cart-icon">
+              <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4"/>
+            </svg>
             Carrello
-            <span *ngIf="cartCount > 0" class="badge-counter">{{ cartCount }}</span>
+            <div *ngIf="cartCount > 0" class="cart-info" [class.cart-animated]="cartAnimated">
+              <span class="badge-counter" [class.counter-pulse]="cartAnimated">{{ cartCount }}</span>
+              <span class="cart-total" *ngIf="cartTotal > 0">${{ cartTotal }}</span>
+            </div>
           </a>
         </li>
         <li class="nav-item"><a routerLink="/orders" routerLinkActive="active" class="nav-link" *ngIf="authService.isLoggedIn()">I Miei Ordini</a></li>
