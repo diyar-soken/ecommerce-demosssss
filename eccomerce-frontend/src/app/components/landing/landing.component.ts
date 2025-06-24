@@ -102,7 +102,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       id: 1, // Database ID
       name: 'PEARBOOK AIR',
       subtitle: 'NOTHING BUT PURE PERFORMANCE',
-      image: '/assets/images/macbook-hero.png',
+      image: '../assets/images/macbook-air.png',
       specs: [
         { label: "PROCESSOR", value: "P1 Neural Engine" },
         { label: "MEMORY", value: "16GB Unified Memory" },
@@ -116,7 +116,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       id: 4, // Database ID
       name: 'PEARPHONE 15',
       subtitle: 'INNOVATION IN YOUR POCKET',
-      image: '/assets/images/iphone-15.png',
+      image: '../assets/images/iphone16.png',
       specs: [
         { label: "PROCESSOR", value: "A17 Pro Chip" },
         { label: "MEMORY", value: "8GB RAM" },
@@ -130,7 +130,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       id: 3, // Database ID
       name: 'PEARPAD PRO',
       subtitle: 'CREATIVITY UNLEASHED',
-      image: '/assets/images/ipad-pro.png',
+      image: '../assets/images/ipadpro.png',
       specs: [
         { label: "PROCESSOR", value: "P2 Ultra Chip" },
         { label: "MEMORY", value: "12GB Unified Memory" },
@@ -155,7 +155,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   galleryItems = [
     {
       id: 1, // Database ID
-      src: "/assets/images/macbook-hero.png",
+      src: "../assets/images/macbook-air-mini.png",
       title: "PearBook Air",
       subtitle: "13-inch MacBook Air",
       price: 1299,
@@ -163,7 +163,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     {
       id: 2, // Database ID
-      src: "/assets/images/macbook-side.png",
+      src: "/assets/images/macbook-pro.png",
       title: "PearBook Pro",
       subtitle: "14-inch MacBook Pro",
       price: 1999,
@@ -171,7 +171,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     {
       id: 3, // Database ID
-      src: "/assets/images/ipad-pro.png",
+      src: "/assets/images/ipadpro-mini.png",
       title: "PearPad Pro",
       subtitle: "12.9-inch iPad Pro",
       price: 1099,
@@ -179,7 +179,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     {
       id: 4, // Database ID
-      src: "/assets/images/iphone-15.png",
+      src: "/assets/images/iphone16-mini.png",
       title: "PearPhone 15",
       subtitle: "6.7-inch Display",
       price: 999,
@@ -187,7 +187,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     {
       id: 5, // Database ID
-      src: "/assets/images/macbook-display.png",
+      src: "/assets/images/applestudio-mini.png",
       title: "Studio Display",
       subtitle: "27-inch 5K Display",
       price: 1599,
@@ -195,7 +195,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     {
       id: 6, // Database ID
-      src: "/assets/images/p2-ultra.png",
+      src: "/assets/images/airpods-mini.png",
       title: "PearPod Pro",
       subtitle: "Wireless Earbuds",
       price: 249,
@@ -374,7 +374,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
         this.cartService.getCartItems().subscribe(items => {
           this.cartService.updateCartCount(items);
         });
-        
+
         this.showAddedToCartNotification(product.title);
         console.log('Product added to cart:', cartItem);
       },
@@ -404,7 +404,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     const notification = document.createElement('div');
     notification.className = `simple-notification ${type}`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
 
     // Mostra con animazione
