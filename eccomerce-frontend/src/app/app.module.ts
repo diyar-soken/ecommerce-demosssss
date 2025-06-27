@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { AppComponent } from './app.component';
@@ -18,6 +18,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ToastNotificationComponent } from './components/toast-notification/toast-notification.component';
+import { FlyingProductComponent } from './components/flying-product/flying-product.component';
+import { ConfettiComponent } from './components/confetti/confetti.component';
+import { SuccessIndicatorComponent } from './components/success-indicator/success-indicator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -35,12 +39,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CartComponent,
     CheckoutComponent,
     OrdersComponent,
-    ToastComponent
+    ToastComponent,
+    ToastNotificationComponent,
+    FlyingProductComponent,
+    ConfettiComponent,
+    SuccessIndicatorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],

@@ -11,6 +11,8 @@ export class OrdersComponent implements OnInit {
   orders: Order[] = [];
   isLoading = true;
   errorMessage = '';
+  selectedOrder: Order | null = null;
+  showDetails = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -31,5 +33,15 @@ export class OrdersComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  showOrderDetails(order: Order) {
+    this.selectedOrder = order;
+    this.showDetails = true;
+  }
+
+  hideOrderDetails() {
+    this.selectedOrder = null;
+    this.showDetails = false;
   }
 }

@@ -1,7 +1,9 @@
 package it.diyar.ecommercedemos.service;
 
+import it.diyar.ecommercedemos.dto.CheckoutRequestDTO;
 import it.diyar.ecommercedemos.dto.OrderDTO;
 import it.diyar.ecommercedemos.dto.OrderItemDTO;
+import it.diyar.ecommercedemos.dto.ShippingAddressDTO;
 import it.diyar.ecommercedemos.model.*;
 import it.diyar.ecommercedemos.repository.*;
 import org.modelmapper.ModelMapper;
@@ -32,7 +34,7 @@ public class OrderService {
     private ModelMapper modelMapper;
 
     @Transactional
-    public OrderDTO createOrderFromCart(String userEmail) {
+    public OrderDTO createOrderFromCart(String userEmail, CheckoutRequestDTO checkoutRequest) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -53,6 +55,19 @@ public class OrderService {
         order.setDate(new Date());
         order.setTotal(total);
         
+        // Imposta l'indirizzo di spedizione
+        if (checkoutRequest != null && checkoutRequest.getShippingAddress() != null) {
+            ShippingAddressDTO shippingAddress = checkoutRequest.getShippingAddress();
+            order.setShippingFullName(shippingAddress.getFullName());
+            order.setShippingAddressLine1(shippingAddress.getAddressLine1());
+            order.setShippingAddressLine2(shippingAddress.getAddressLine2());
+            order.setShippingCity(shippingAddress.getCity());
+            order.setShippingPostalCode(shippingAddress.getPostalCode());
+            order.setShippingProvince(shippingAddress.getProvince());
+            order.setShippingCountry(shippingAddress.getCountry());
+            order.setShippingPhoneNumber(shippingAddress.getPhoneNumber());
+        }
+        
         Order savedOrder = orderRepository.save(order);
 
         // Crea gli OrderItem dal carrello
@@ -72,6 +87,12 @@ public class OrderService {
         cartItemRepository.deleteAll(cartItems);
 
         return convertToDTO(savedOrder);
+    }
+
+    // Metodo di fallback per compatibilità
+    @Transactional
+    public OrderDTO createOrderFromCart(String userEmail) {
+        return createOrderFromCart(userEmail, null);
     }
 
     public List<OrderDTO> getUserOrders(String userEmail) {
@@ -103,6 +124,20 @@ public class OrderService {
         orderDTO.setId(order.getId());
         orderDTO.setDate(order.getDate());
         orderDTO.setTotal(order.getTotal());
+
+        // Converti l'indirizzo di spedizione
+        if (order.getShippingFullName() != null) {
+            ShippingAddressDTO shippingAddressDTO = new ShippingAddressDTO();
+            shippingAddressDTO.setFullName(order.getShippingFullName());
+            shippingAddressDTO.setAddressLine1(order.getShippingAddressLine1());
+            shippingAddressDTO.setAddressLine2(order.getShippingAddressLine2());
+            shippingAddressDTO.setCity(order.getShippingCity());
+            shippingAddressDTO.setPostalCode(order.getShippingPostalCode());
+            shippingAddressDTO.setProvince(order.getShippingProvince());
+            shippingAddressDTO.setCountry(order.getShippingCountry());
+            shippingAddressDTO.setPhoneNumber(order.getShippingPhoneNumber());
+            orderDTO.setShippingAddress(shippingAddressDTO);
+        }
 
         List<OrderItemDTO> itemDTOs = order.getOrderItems().stream().map(item -> {
             OrderItemDTO itemDTO = new OrderItemDTO();

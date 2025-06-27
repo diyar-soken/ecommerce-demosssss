@@ -1,5 +1,6 @@
 package it.diyar.ecommercedemos.controller;
 
+import it.diyar.ecommercedemos.dto.CheckoutRequestDTO;
 import it.diyar.ecommercedemos.dto.OrderDTO;
 import it.diyar.ecommercedemos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/checkout")
-    public ResponseEntity<OrderDTO> checkout(Authentication authentication) {
+    public ResponseEntity<OrderDTO> checkout(@RequestBody CheckoutRequestDTO checkoutRequest, Authentication authentication) {
         try {
-            OrderDTO order = orderService.createOrderFromCart(authentication.getName());
+            OrderDTO order = orderService.createOrderFromCart(authentication.getName(), checkoutRequest);
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

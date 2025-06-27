@@ -1,5 +1,5 @@
--- Inserimento Categorie
-INSERT INTO categories (id, name, description) VALUES
+-- Inserimento Categorie (con gestione duplicati)
+INSERT IGNORE INTO categories (id, name, description) VALUES
 (1, 'Computers', 'High-performance computers and laptops'),
 (2, 'Tablets', 'Innovative tablets for work and creativity'),
 (3, 'Smartphones', 'Cutting-edge smartphones'),
@@ -7,8 +7,8 @@ INSERT INTO categories (id, name, description) VALUES
 (5, 'Audio', 'Premium audio accessories'),
 (6, 'Accessories', 'Essential tech accessories');
 
--- Inserimento Prodotti Pear
-INSERT INTO products (id, name, description, price, image_url, category_id) VALUES
+-- Inserimento Prodotti Pear (con gestione duplicati)
+INSERT IGNORE INTO products (id, name, description, price, image_url, category_id) VALUES
 -- Computers
 (1, 'PearBook Air', 'Supercharged by the P1 Neural Engine. 13-inch MacBook Air with incredible performance and all-day battery life.', 1299.0, '/assets/images/macbook-air-mini.png', 1),
 (2, 'PearBook Pro', 'Pro performance for demanding tasks. 14-inch MacBook Pro with advanced M2 Pro chip and ProMotion display.', 1999.0, '/assets/images/macbook-pro.png', 1),
@@ -30,3 +30,5 @@ INSERT INTO products (id, name, description, price, image_url, category_id) VALU
 --(8, 'Magic Mouse', 'Wireless precision. Multi-Touch surface with gesture support and rechargeable battery.', 199.0, '/assets/images/magic-mouse.png', 6),
 --(9, 'PearWatch Ultra', 'Ultimate fitness companion. GPS + Cellular with titanium case and Action Button.', 799.0, '/assets/images/watch-ultra.png', 6),
 --(10, 'AirTag 4-Pack', 'Find your things. Precision Finding with Ultra Wideband technology.', 99.0, '/assets/images/airtag.png', 6);
+
+

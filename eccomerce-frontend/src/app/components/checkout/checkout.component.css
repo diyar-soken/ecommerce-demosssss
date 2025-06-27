@@ -1,143 +1,479 @@
-.checkout-steps {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  position: relative;
+/* Container principale */
+.checkout-wrapper {
+  max-width: 1200px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 90vh;
+  border-radius: 24px;
+  padding: 2rem;
+  margin: 1rem auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
-.checkout-step {
+/* Titolo checkout */
+.checkout-wrapper h2 {
+  background: linear-gradient(135deg, #444547, #6b6e77);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
   text-align: center;
-  flex: 1;
-  position: relative;
+  font-weight: 700;
 }
 
-.checkout-step-number {
-  width: 40px;
-  height: 40px;
-  background-color: var(--gray-200);
-  color: var(--gray-600);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 0.5rem;
+/* Cards migliorati */
+.card {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Header delle cards */
+.card-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-bottom: 2px solid #e2e8f0;
+  border-radius: 20px 20px 0 0 !important;
+  padding: 1.5rem 2rem;
+}
+
+.card-header h2,
+.card-header h4 {
+  color: #1e293b;
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Tabella riepilogo */
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  color: #1e293b;
   font-weight: 600;
+  border: none;
+  padding: 1rem;
+  font-size: 0.95rem;
 }
 
-.checkout-step.active .checkout-step-number {
-  background-color: var(--primary-color);
-  color: var(--white);
-}
-
-.checkout-step-title {
-  font-size: 0.875rem;
-  color: var(--gray-600);
+.table td {
+  padding: 1.2rem 1rem;
+  border-color: rgba(226, 232, 240, 0.5);
+  vertical-align: middle;
   font-weight: 500;
+  color: #475569;
 }
 
-.checkout-step.active .checkout-step-title {
-  color: var(--primary-color);
+.table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.02);
+  transform: translateX(4px);
+  transition: all 0.2s ease;
+}
+
+.table-active th {
+  background: linear-gradient(135deg, #5a80e1, #075ec8);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Pulsanti migliorati */
+.btn {
+  border-radius: 12px;
   font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: none;
+  position: relative;
+  overflow: hidden;
 }
 
-.checkout-step:not(:last-child)::after {
+.btn-secondary {
+  background: linear-gradient(135deg, #64748b, #475569);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #475569, #334155);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(100, 116, 139, 0.3);
+}
+
+.btn-success,
+.btn-lg {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #5a80e1, #075ec8);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #075ec8, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.btn-outline-primary {
+  border: 2px solid #5a80e1;
+  color: #5a80e1;
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: rgba(90, 128, 225, 0.1);
+  border-color: #075ec8;
+  color: #075ec8;
+  transform: translateY(-2px);
+}
+
+/* Effetto shimmer per pulsanti */
+.btn::before {
   content: '';
   position: absolute;
-  top: 20px;
-  left: 60px;
-  right: 0;
-  height: 2px;
-  background-color: var(--gray-200);
-  z-index: -1;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
-.checkout-step.active:not(:last-child)::after {
-  background-color: var(--primary-color);
+.btn:hover::before {
+  left: 100%;
 }
 
-.section-title {
-  font-size: 1.25rem;
-  font-weight: 600;
+/* Spinner loading */
+.spinner-border {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* Alert personalizzati */
+.alert {
+  border-radius: 16px;
+  border: none;
+  padding: 1.2rem 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  color: #dc2626;
+  border-left: 4px solid #ef4444;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+  color: #059669;
+  border-left: 4px solid #10b981;
+}
+
+/* Carrello vuoto */
+.empty-checkout {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.empty-checkout h3 {
+  color: #1e293b;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  color: var(--dark-color);
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--gray-200);
 }
 
-.payment-method {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
+.empty-checkout p {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Ordine confermato */
+.border-success {
+  border-color: #10b981 !important;
+  border-width: 2px !important;
+}
+
+.bg-success {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.text-success {
+  color: #10b981 !important;
+}
+
+/* Sezione dettagli ordine */
+.order-details {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.order-details h5 {
+  color: #1e293b;
+  font-weight: 700;
   margin-bottom: 1rem;
-  border: 1px solid var(--gray-200);
-  border-radius: 0.35rem;
-  cursor: pointer;
-  transition: var(--transition);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
 }
 
-.payment-method:hover {
-  border-color: var(--primary-color);
-}
-
-.payment-method.active {
-  border-color: var(--primary-color);
-  background-color: rgba(78, 115, 223, 0.05);
-}
-
-.payment-method-icon {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  color: var(--primary-color);
-}
-
-.payment-method-details {
-  flex-grow: 1;
-}
-
-.payment-method-title {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.payment-method-desc {
-  font-size: 0.875rem;
-  color: var(--gray-600);
-}
-
-.order-summary-item {
-  display: flex;
-  justify-content: space-between;
+.order-details p,
+.order-details li {
+  color: #475569;
+  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
-.order-summary-total {
-  font-weight: 600;
-  font-size: 1.1rem;
+.order-details strong {
+  color: #1e293b;
 }
 
-.order-summary-img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 0.25rem;
-  margin-right: 1rem;
+/* Icon success */
+.fas.fa-check-circle {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
 }
 
-.order-summary-product {
-  display: flex;
-  margin-bottom: 1rem;
+/* Gap per i pulsanti */
+.gap-3 {
+  gap: 1rem !important;
 }
 
-.order-summary-product-details {
-  flex-grow: 1;
+/* Validazione form */
+.form-control.is-invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
 }
 
-.order-summary-product-title {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+.form-control.is-invalid:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
 }
 
-.order-summary-product-price {
-  color: var(--primary-color);
-  font-weight: 600;
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* Stili per form valido */
+.form-control.is-valid {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.form-control.is-valid:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Dark Mode Support */
+body.dark-mode .checkout-wrapper {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .checkout-wrapper h2 {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .card {
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .card-header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-bottom-color: #475569;
+}
+
+body.dark-mode .card-header h2,
+body.dark-mode .card-header h4 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .form-floating input,
+body.dark-mode .form-control {
+  background: rgba(51, 65, 85, 0.8);
+  border-color: #475569;
+  color: var(--text-primary);
+}
+
+body.dark-mode .form-floating input:focus,
+body.dark-mode .form-control:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+  background: #334155;
+}
+
+body.dark-mode .form-floating label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .table {
+  color: var(--text-primary);
+}
+
+body.dark-mode .table th {
+  color: var(--text-primary);
+  border-bottom-color: #475569;
+}
+
+body.dark-mode .table td {
+  border-top-color: #475569;
+}
+
+body.dark-mode .btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+body.dark-mode .btn-primary:hover {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.4);
+}
+
+body.dark-mode .btn-secondary {
+  background: #475569;
+  border-color: #475569;
+}
+
+body.dark-mode .btn-secondary:hover {
+  background: #64748b;
+  border-color: #64748b;
+}
+
+body.dark-mode .empty-checkout {
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .empty-checkout h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .empty-checkout p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .order-details {
+  background: linear-gradient(135deg, #334155, #475569);
+}
+
+body.dark-mode .order-details h5 {
+  color: var(--text-primary);
+  border-bottom-color: #64748b;
+}
+
+body.dark-mode .order-details p,
+body.dark-mode .order-details li {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .order-details strong {
+  color: var(--text-primary);
+}
+
+body.dark-mode .form-control.is-invalid {
+  border-color: #f87171;
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.2);
+}
+
+body.dark-mode .form-control.is-invalid:focus {
+  border-color: #f87171;
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.3);
+}
+
+body.dark-mode .invalid-feedback {
+  color: #f87171;
+}
+
+body.dark-mode .form-control.is-valid {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+body.dark-mode .form-control.is-valid:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .checkout-wrapper {
+    padding: 1.5rem;
+    margin: 0.5rem;
+    border-radius: 16px;
+  }
+
+  .card-header {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .checkout-wrapper h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout-wrapper {
+    padding: 1rem;
+  }
+
+  .checkout-wrapper h2 {
+    font-size: 1.6rem;
+  }
+
+  .table-responsive {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .d-flex.justify-content-center.gap-3 {
+    flex-direction: column;
+  }
 }

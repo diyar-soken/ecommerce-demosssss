@@ -1,0 +1,280 @@
+/* Flying Products Container */
+.flying-products-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+/* Flying Product */
+.flying-product {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.product-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  animation: flyToCart 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Product Image */
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: productSpin 1.2s ease-out forwards;
+}
+
+/* Product Glow Effect */
+.product-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glowPulse 1.2s ease-out forwards;
+}
+
+/* Product Trail Effect */
+.product-trail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: trailEffect 1.2s ease-out forwards;
+}
+
+.product-trail::before,
+.product-trail::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(34, 197, 94, 0.6);
+  border-radius: 50%;
+  animation: trailParticles 1.2s ease-out forwards;
+}
+
+.product-trail::before {
+  top: -8px;
+  left: -8px;
+  animation-delay: 0.1s;
+}
+
+.product-trail::after {
+  top: 8px;
+  left: 8px;
+  animation-delay: 0.2s;
+}
+
+/* Main Flying Animation - Enhanced with realistic physics */
+@keyframes flyToCart {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+    filter: brightness(1) blur(0px);
+  }
+  15% {
+    transform: translate(calc((var(--end-x) - var(--start-x, 0)) * 0.05), calc((var(--end-y) - var(--start-y, 0)) * 0.05 - 40px)) scale(1.15) rotate(30deg);
+    opacity: 1;
+    filter: brightness(1.1) blur(0px);
+  }
+  35% {
+    transform: translate(calc((var(--end-x) - var(--start-x, 0)) * 0.3), calc((var(--end-y) - var(--start-y, 0)) * 0.3 - 60px)) scale(1.05) rotate(120deg);
+    opacity: 0.95;
+    filter: brightness(1.05) blur(0.5px);
+  }
+  60% {
+    transform: translate(calc((var(--end-x) - var(--start-x, 0)) * 0.7), calc((var(--end-y) - var(--start-y, 0)) * 0.7 - 35px)) scale(0.8) rotate(220deg);
+    opacity: 0.8;
+    filter: brightness(0.9) blur(1px);
+  }
+  85% {
+    transform: translate(calc((var(--end-x) - var(--start-x, 0)) * 0.95), calc((var(--end-y) - var(--start-y, 0)) * 0.95 - 10px)) scale(0.5) rotate(320deg);
+    opacity: 0.5;
+    filter: brightness(0.7) blur(1.5px);
+  }
+  100% {
+    transform: translate(calc(var(--end-x) - var(--start-x, 0)), calc(var(--end-y) - var(--start-y, 0))) scale(0.2) rotate(360deg);
+    opacity: 0;
+    filter: brightness(0.5) blur(2px);
+  }
+}
+
+/* Product Spin Animation */
+@keyframes productSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1) saturate(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    filter: brightness(1.2) saturate(1.3);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.95);
+    filter: brightness(1.1) saturate(1.2);
+  }
+  75% {
+    transform: rotate(270deg) scale(0.8);
+    filter: brightness(1) saturate(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(0.6);
+    filter: brightness(0.8) saturate(0.9);
+  }
+}
+
+/* Glow Pulse Animation */
+@keyframes glowPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  20% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.5);
+  }
+  80% {
+    opacity: 0.3;
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Trail Effect Animation */
+@keyframes trailEffect {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+  }
+}
+
+/* Trail Particles Animation */
+@keyframes trailParticles {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Success Burst Effect */
+@keyframes successBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) rotate(360deg);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .product-wrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .product-image {
+    border-radius: 8px;
+  }
+  
+  .product-glow {
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .product-image {
+    border-radius: 6px;
+  }
+  
+  .product-glow {
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+  }
+}
+
+/* Dark Theme Adjustments - Integrato con il sistema temi */
+body.dark-mode .product-image {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .product-glow {
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.6) 0%, transparent 70%);
+}
+
+/* Miglioramenti aggiuntivi per la dark mode */
+body.dark-mode .product-wrapper {
+  filter: brightness(1.1);
+}
+
+body.dark-mode .product-trail {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.8);
+}
+
+body.dark-mode .product-trail::before,
+body.dark-mode .product-trail::after {
+  background: rgba(34, 197, 94, 0.8);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}

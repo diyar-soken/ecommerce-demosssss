@@ -1,6 +1,6 @@
-<div class="container mt-4">
+<div class="checkout-wrapper">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       
       <!-- Messaggio di errore -->
       <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
@@ -39,6 +39,136 @@
               </tfoot>
             </table>
           </div>
+        </div>
+      </div>
+
+      <!-- Form di spedizione -->
+      <div *ngIf="cartItems.length > 0 && !orderConfirmed" class="card mt-4">
+        <div class="card-header">
+          <h4 class="mb-0">Indirizzo di Spedizione</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="shippingForm" novalidate>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isFieldInvalid('fullName')"
+                    id="fullName" 
+                    formControlName="fullName" 
+                    placeholder="Nome completo">
+                  <label for="fullName">Nome Completo *</label>
+                  <div *ngIf="isFieldInvalid('fullName')" class="invalid-feedback">
+                    {{ getFieldError('fullName') }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input 
+                    type="tel" 
+                    class="form-control" 
+                    [class.is-invalid]="isFieldInvalid('phoneNumber')"
+                    id="phoneNumber" 
+                    formControlName="phoneNumber" 
+                    placeholder="Numero di telefono">
+                  <label for="phoneNumber">Numero di Telefono *</label>
+                  <div *ngIf="isFieldInvalid('phoneNumber')" class="invalid-feedback">
+                    {{ getFieldError('phoneNumber') }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input 
+                type="text" 
+                class="form-control" 
+                [class.is-invalid]="isFieldInvalid('addressLine1')"
+                id="addressLine1" 
+                formControlName="addressLine1" 
+                placeholder="Indirizzo">
+              <label for="addressLine1">Indirizzo *</label>
+              <div *ngIf="isFieldInvalid('addressLine1')" class="invalid-feedback">
+                {{ getFieldError('addressLine1') }}
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="addressLine2" 
+                formControlName="addressLine2" 
+                placeholder="Appartamento, scala, ecc. (opzionale)">
+              <label for="addressLine2">Appartamento, scala, ecc. (opzionale)</label>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isFieldInvalid('city')"
+                    id="city" 
+                    formControlName="city" 
+                    placeholder="Città">
+                  <label for="city">Città *</label>
+                  <div *ngIf="isFieldInvalid('city')" class="invalid-feedback">
+                    {{ getFieldError('city') }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating mb-3">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isFieldInvalid('postalCode')"
+                    id="postalCode" 
+                    formControlName="postalCode" 
+                    placeholder="CAP"
+                    maxlength="5">
+                  <label for="postalCode">CAP *</label>
+                  <div *ngIf="isFieldInvalid('postalCode')" class="invalid-feedback">
+                    {{ getFieldError('postalCode') }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating mb-3">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isFieldInvalid('province')"
+                    id="province" 
+                    formControlName="province" 
+                    placeholder="Provincia">
+                  <label for="province">Provincia *</label>
+                  <div *ngIf="isFieldInvalid('province')" class="invalid-feedback">
+                    {{ getFieldError('province') }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input 
+                type="text" 
+                class="form-control" 
+                [class.is-invalid]="isFieldInvalid('country')"
+                id="country" 
+                formControlName="country" 
+                placeholder="Paese">
+              <label for="country">Paese *</label>
+              <div *ngIf="isFieldInvalid('country')" class="invalid-feedback">
+                {{ getFieldError('country') }}
+              </div>
+            </div>
+          </form>
           
           <div class="d-flex justify-content-between mt-4">
             <button 
@@ -59,16 +189,12 @@
       </div>
 
       <!-- Carrello vuoto -->
-      <div *ngIf="cartItems.length === 0 && !orderConfirmed" class="text-center">
-        <div class="card">
-          <div class="card-body">
-            <h3>Il carrello è vuoto</h3>
-            <p class="text-muted">Aggiungi alcuni prodotti al carrello per procedere con l'ordine.</p>
-            <button class="btn btn-primary" (click)="continueShopping()">
-              Vai allo Shopping
-            </button>
-          </div>
-        </div>
+      <div *ngIf="cartItems.length === 0 && !orderConfirmed" class="empty-checkout">
+        <h3>Il carrello è vuoto</h3>
+        <p>Aggiungi alcuni prodotti al carrello per procedere con l'ordine.</p>
+        <button class="btn btn-primary" (click)="continueShopping()">
+          Vai allo Shopping
+        </button>
       </div>
 
       <!-- Ordine confermato -->
@@ -88,18 +214,22 @@
             
             <div class="row mt-4">
               <div class="col-md-6">
-                <h5>Dettagli Ordine:</h5>
-                <p><strong>Numero Ordine:</strong> #{{ confirmedOrder.id }}</p>
-                <p><strong>Data:</strong> {{ confirmedOrder.date | date:'dd/MM/yyyy HH:mm' }}</p>
-                <p><strong>Totale:</strong> €{{ confirmedOrder.total.toFixed(2) }}</p>
+                <div class="order-details">
+                  <h5>Dettagli Ordine:</h5>
+                  <p><strong>Numero Ordine:</strong> #{{ confirmedOrder.id }}</p>
+                  <p><strong>Data:</strong> {{ confirmedOrder.date | date:'dd/MM/yyyy HH:mm' }}</p>
+                  <p><strong>Totale:</strong> €{{ confirmedOrder.total.toFixed(2) }}</p>
+                </div>
               </div>
               <div class="col-md-6">
-                <h5>Prodotti Ordinati:</h5>
-                <ul class="list-unstyled">
-                  <li *ngFor="let item of confirmedOrder.items">
-                    {{ item.productName }} (x{{ item.quantity }})
-                  </li>
-                </ul>
+                <div class="order-details">
+                  <h5>Prodotti Ordinati:</h5>
+                  <ul class="list-unstyled">
+                    <li *ngFor="let item of confirmedOrder.items">
+                      {{ item.productName }} (x{{ item.quantity }})
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             

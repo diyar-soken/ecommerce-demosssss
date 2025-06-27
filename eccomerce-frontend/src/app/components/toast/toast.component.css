@@ -122,6 +122,26 @@
   animation: slideIn 0.3s ease forwards;
 }
 
+/* Dark Mode Support */
+body.dark-mode .toast {
+  background: #1e293b;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid #334155;
+}
+
+body.dark-mode .toast-message {
+  color: var(--text-primary);
+}
+
+body.dark-mode .toast-close {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .toast-close:hover {
+  color: var(--text-secondary);
+  background: #334155;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .toast-container {

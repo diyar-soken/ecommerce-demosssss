@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Order } from '../models/order.model';
+import { Order, CheckoutRequest } from '../models/order.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  checkout(): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrl}/checkout`, {});
+  checkout(checkoutRequest?: CheckoutRequest): Observable<Order> {
+    return this.http.post<Order>(`${this.apiUrl}/checkout`, checkoutRequest || {});
   }
 
   getUserOrders(): Observable<Order[]> {

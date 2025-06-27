@@ -1,14 +1,14 @@
-<div class="container mt-4">
+<div class="orders-wrapper">
   <div class="row">
     <div class="col-12">
-      <h2 class="mb-4">I Miei Ordini</h2>
+      <h2>I Miei Ordini</h2>
 
       <!-- Loading -->
-      <div *ngIf="isLoading" class="text-center">
+      <div *ngIf="isLoading" class="loading-container">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Caricamento...</span>
         </div>
-        <p class="mt-2">Caricamento ordini...</p>
+        <p>Caricamento ordini...</p>
       </div>
 
       <!-- Messaggio di errore -->
@@ -17,50 +17,48 @@
       </div>
 
       <!-- Nessun ordine -->
-      <div *ngIf="!isLoading && orders.length === 0 && !errorMessage" class="text-center">
-        <div class="card">
-          <div class="card-body">
-            <h4>Nessun ordine trovato</h4>
-            <p class="text-muted">Non hai ancora effettuato nessun ordine.</p>
-            <a routerLink="/home" class="btn btn-primary">Inizia a fare shopping</a>
-          </div>
-        </div>
+      <div *ngIf="!isLoading && orders.length === 0 && !errorMessage" class="no-orders">
+        <h4>Nessun ordine trovato</h4>
+        <p>Non hai ancora effettuato nessun ordine.</p>
+        <a routerLink="/home" class="btn btn-primary">Inizia a fare shopping</a>
       </div>
 
       <!-- Lista ordini -->
       <div *ngIf="!isLoading && orders.length > 0">
         <div class="row">
-          <div class="col-md-6 mb-4" *ngFor="let order of orders">
-            <div class="card">
+          <div class="col-lg-6 mb-4" *ngFor="let order of orders">
+            <div class="card order-card">
               <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Ordine #{{ order.id }}</h5>
                 <span class="badge bg-success">Completato</span>
               </div>
               <div class="card-body">
-                <div class="row mb-3">
-                  <div class="col-6">
-                    <strong>Data:</strong><br>
-                    <small>{{ order.date | date:'dd/MM/yyyy HH:mm' }}</small>
-                  </div>
-                  <div class="col-6 text-end">
-                    <strong>Totale:</strong><br>
-                    <span class="h5 text-success">€{{ order.total.toFixed(2) }}</span>
+                <div class="order-info">
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <strong>Data:</strong>
+                      <small>{{ order.date | date:'dd/MM/yyyy HH:mm' }}</small>
+                    </div>
+                    <div class="col-6 text-end">
+                      <strong>Totale:</strong>
+                      <span class="h5 text-success">€{{ order.total.toFixed(2) }}</span>
+                    </div>
                   </div>
                 </div>
                 
-                <div class="mb-3">
+                <div class="products-section">
                   <strong>Prodotti:</strong>
-                  <ul class="list-unstyled mt-2">
-                    <li *ngFor="let item of order.items" class="d-flex justify-content-between">
-                      <span>{{ item.productName }}</span>
-                      <span>{{ item.quantity }}x €{{ item.price.toFixed(2) }}</span>
-                    </li>
-                  </ul>
+                  <div class="products-list">
+                    <div *ngFor="let item of order.items" class="product-item">
+                      <span class="product-name">{{ item.productName }}</span>
+                      <span class="product-details">{{ item.quantity }}x €{{ item.price.toFixed(2) }}</span>
+                    </div>
+                  </div>
                 </div>
                 
-                <div class="d-flex justify-content-between">
-                  <small class="text-muted">{{ order.items.length }} prodotto(i)</small>
-                  <button class="btn btn-outline-primary btn-sm">
+                <div class="order-footer">
+                  <small class="order-stats">{{ order.items.length }} prodotto(i)</small>
+                  <button class="btn btn-outline-primary btn-sm" (click)="showOrderDetails(order)">
                     Dettagli
                   </button>
                 </div>
@@ -69,6 +67,126 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal dettagli ordine -->
+      <div *ngIf="showDetails && selectedOrder" class="modal-overlay" (click)="hideOrderDetails()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Dettagli Ordine #{{ selectedOrder.id }}</h3>
+            <button type="button" class="btn-close" (click)="hideOrderDetails()">
+              <span>&times;</span>
+            </button>
+          </div>
+          
+          <div class="modal-body">
+            <!-- Info ordine -->
+            <div class="order-details-section">
+              <h4>📋 Informazioni Ordine</h4>
+              <div class="details-grid">
+                <div class="detail-item">
+                  <strong><i class="fas fa-hashtag me-2"></i>Numero Ordine:</strong>
+                  <span>#{{ selectedOrder.id }}</span>
+                </div>
+                <div class="detail-item">
+                  <strong><i class="fas fa-calendar-alt me-2"></i>Data:</strong>
+                  <span>{{ selectedOrder.date | date:'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+                <div class="detail-item">
+                  <strong><i class="fas fa-euro-sign me-2"></i>Totale:</strong>
+                  <span class="price-highlight">€{{ selectedOrder.total.toFixed(2) }}</span>
+                </div>
+                <div class="detail-item">
+                  <strong><i class="fas fa-check-circle me-2"></i>Stato:</strong>
+                  <span class="status-badge">Completato</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indirizzo di spedizione -->
+            <div class="order-details-section">
+              <h4>📍 Indirizzo di Spedizione</h4>
+              <div *ngIf="selectedOrder.shippingAddress; else noAddress" class="shipping-address">
+                <div class="address-header">
+                  <i class="fas fa-user me-2"></i>
+                  <strong>{{ selectedOrder.shippingAddress.fullName }}</strong>
+                </div>
+                <div class="address-line">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  {{ selectedOrder.shippingAddress.addressLine1 }}
+                </div>
+                <div *ngIf="selectedOrder.shippingAddress.addressLine2" class="address-line">
+                  <i class="fas fa-building me-2"></i>
+                  {{ selectedOrder.shippingAddress.addressLine2 }}
+                </div>
+                <div class="address-line">
+                  <i class="fas fa-city me-2"></i>
+                  {{ selectedOrder.shippingAddress.postalCode }} {{ selectedOrder.shippingAddress.city }} ({{ selectedOrder.shippingAddress.province }})
+                </div>
+                <div class="address-line">
+                  <i class="fas fa-flag me-2"></i>
+                  {{ selectedOrder.shippingAddress.country }}
+                </div>
+                <div class="address-line">
+                  <i class="fas fa-phone me-2"></i>
+                  {{ selectedOrder.shippingAddress.phoneNumber }}
+                </div>
+              </div>
+              <ng-template #noAddress>
+                <div class="no-address">
+                  <i class="fas fa-exclamation-triangle me-2"></i>
+                  <span>Indirizzo di spedizione non disponibile</span>
+                </div>
+              </ng-template>
+            </div>
+
+            <!-- Prodotti ordinati -->
+            <div class="order-details-section">
+              <h4>🛍️ Prodotti Ordinati</h4>
+              <div class="products-list-detailed">
+                <div *ngFor="let item of selectedOrder.items" class="product-item-detailed">
+                  <div class="product-info">
+                    <div class="product-name">
+                      <i class="fas fa-box me-2"></i>
+                      {{ item.productName }}
+                    </div>
+                    <div class="product-quantity">
+                      <i class="fas fa-sort-numeric-up me-2"></i>
+                      Quantità: {{ item.quantity }}
+                    </div>
+                  </div>
+                  <div class="product-price">
+                    <span class="unit-price">
+                      <i class="fas fa-tag me-1"></i>
+                      €{{ item.price.toFixed(2) }} cad.
+                    </span>
+                    <span class="total-price">
+                      <i class="fas fa-calculator me-1"></i>
+                      €{{ (item.price * item.quantity).toFixed(2) }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="order-total-detailed">
+                <div class="total-line">
+                  <span>
+                    <i class="fas fa-receipt me-2"></i>
+                    Totale Ordine:
+                  </span>
+                  <span class="total-amount">€{{ selectedOrder.total.toFixed(2) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="hideOrderDetails()">
+              Chiudi
+            </button>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>

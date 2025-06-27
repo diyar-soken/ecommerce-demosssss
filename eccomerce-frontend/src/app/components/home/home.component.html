@@ -16,7 +16,7 @@
 
   <!-- Products Section -->
   <div class="container products-container">
-    
+
     <!-- No Products State -->
     <div *ngIf="products.length === 0" class="no-products-state">
       <div class="text-center">
@@ -31,8 +31,208 @@
       <div class="product-card-wrapper" *ngFor="let product of products; trackBy: trackByProductId">
         <app-product-card
           [product]="product"
-          (addToCart)="addToCart(product.id)">
+          (addToCart)="addToCart(product.id)"
+          (quickView)="openQuickView($event)">
         </app-product-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div 
+    *ngIf="isQuickViewOpen" 
+    class="quick-view-modal"
+    (click)="onQuickViewBackdropClick($event)">
+    <div class="quick-view-content">
+      <!-- Close Button -->
+      <button class="quick-view-close" (click)="closeQuickView()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="quick-view-body" *ngIf="selectedProduct">
+        <!-- Product Image -->
+        <div class="quick-view-image">
+          <img [src]="selectedProduct.imageUrl" [alt]="selectedProduct.name" />
+          <div class="quick-view-image-glow"></div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="quick-view-details">
+          <div class="quick-view-badge">PREMIUM COLLECTION</div>
+          
+          <h2 class="quick-view-title">{{ selectedProduct.name }}</h2>
+          <p class="quick-view-subtitle">{{ selectedProduct.description || 'Premium Product' }}</p>
+          
+          <div class="quick-view-price">
+            <span class="price-currency">€</span>
+            <span class="price-amount">{{ selectedProduct.price }}</span>
+            <span class="price-decimal">.00</span>
+          </div>
+
+          <p class="quick-view-description">{{ selectedProduct.description || 'Experience the perfect blend of innovation and elegance with this premium product from our collection.' }}</p>
+
+          <!-- Product Features -->
+          <div class="quick-view-features">
+            <h4>Key Features</h4>
+            <ul>
+              <li *ngIf="selectedProduct.name.includes('PearBook') || selectedProduct.name.toLowerCase().includes('macbook')">
+                <span class="feature-icon">⚡</span>
+                P1 Neural Engine for lightning-fast performance
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearBook') || selectedProduct.name.toLowerCase().includes('macbook')">
+                <span class="feature-icon">🖥️</span>
+                Liquid Retina display with True Tone technology
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearPhone') || selectedProduct.name.toLowerCase().includes('iphone')">
+                <span class="feature-icon">📱</span>
+                A17 Pro chip with advanced camera system
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearPhone') || selectedProduct.name.toLowerCase().includes('iphone')">
+                <span class="feature-icon">📸</span>
+                Pro camera system with 3x optical zoom
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearPad') || selectedProduct.name.toLowerCase().includes('ipad')">
+                <span class="feature-icon">✏️</span>
+                Compatible with Pear Pencil (2nd generation)
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearPad') || selectedProduct.name.toLowerCase().includes('ipad')">
+                <span class="feature-icon">🎨</span>
+                Liquid Retina XDR display for creative work
+              </li>
+              <li *ngIf="selectedProduct.name.includes('Studio')">
+                <span class="feature-icon">🖥️</span>
+                27-inch 5K Retina display with P3 wide color
+              </li>
+              <li *ngIf="selectedProduct.name.includes('Studio')">
+                <span class="feature-icon">🔊</span>
+                Built-in speakers with spatial audio
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearPod') || selectedProduct.name.toLowerCase().includes('airpods')">
+                <span class="feature-icon">🎵</span>
+                Spatial Audio with dynamic head tracking
+              </li>
+              <li *ngIf="selectedProduct.name.includes('PearPod') || selectedProduct.name.toLowerCase().includes('airpods')">
+                <span class="feature-icon">🔋</span>
+                Up to 30 hours of listening time
+              </li>
+              <!-- Generic features for other products -->
+              <li *ngIf="!selectedProduct.name.toLowerCase().includes('pearbook') && 
+                        !selectedProduct.name.toLowerCase().includes('macbook') &&
+                        !selectedProduct.name.toLowerCase().includes('pearphone') && 
+                        !selectedProduct.name.toLowerCase().includes('iphone') &&
+                        !selectedProduct.name.toLowerCase().includes('pearpad') && 
+                        !selectedProduct.name.toLowerCase().includes('ipad') &&
+                        !selectedProduct.name.toLowerCase().includes('studio') &&
+                        !selectedProduct.name.toLowerCase().includes('pearPod') && 
+                        !selectedProduct.name.toLowerCase().includes('airpods')">
+                <span class="feature-icon">✨</span>
+                Premium quality materials and construction
+              </li>
+              <li *ngIf="!selectedProduct.name.toLowerCase().includes('pearbook') && 
+                        !selectedProduct.name.toLowerCase().includes('macbook') &&
+                        !selectedProduct.name.toLowerCase().includes('pearphone') && 
+                        !selectedProduct.name.toLowerCase().includes('iphone') &&
+                        !selectedProduct.name.toLowerCase().includes('pearpad') && 
+                        !selectedProduct.name.toLowerCase().includes('ipad') &&
+                        !selectedProduct.name.toLowerCase().includes('studio') &&
+                        !selectedProduct.name.toLowerCase().includes('pearPod') && 
+                        !selectedProduct.name.toLowerCase().includes('airpods')">
+                <span class="feature-icon">🛡️</span>
+                Extended warranty and premium support
+              </li>
+            </ul>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="quick-view-actions">
+            <button class="btn-add-to-cart-large" (click)="addToCartFromQuickView(selectedProduct)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4"/>
+              </svg>
+              Add to Cart
+            </button>
+            
+            <button class="btn-buy-now" (click)="buyNow(selectedProduct!)">
+              <svg *ngIf="isUserLoggedIn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4"/>
+                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/>
+              </svg>
+              <svg *ngIf="!isUserLoggedIn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10,17 15,12 10,7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+              {{ isUserLoggedIn ? 'Buy Now' : 'Login & Buy' }}
+            </button>
+          </div>
+
+          <!-- Product Specs Preview -->
+          <div class="quick-view-specs">
+            <h4>Specifications</h4>
+            <div class="specs-grid">
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearBook')">
+                <span class="spec-label">Processor</span>
+                <span class="spec-value">P1 Neural Engine</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearBook')">
+                <span class="spec-label">Memory</span>
+                <span class="spec-value">16GB Unified</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearPhone')">
+                <span class="spec-label">Display</span>
+                <span class="spec-value">6.7" Super Retina XDR</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearPhone')">
+                <span class="spec-label">Storage</span>
+                <span class="spec-value">256GB</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearPad')">
+                <span class="spec-label">Display</span>
+                <span class="spec-value">12.9" Liquid Retina XDR</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearPad')">
+                <span class="spec-label">Chip</span>
+                <span class="spec-value">P2 Ultra</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('Studio')">
+                <span class="spec-label">Display</span>
+                <span class="spec-value">27" 5K Retina</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('Studio')">
+                <span class="spec-label">Audio</span>
+                <span class="spec-value">Spatial Audio</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearPod')">
+                <span class="spec-label">Battery</span>
+                <span class="spec-value">30 hours</span>
+              </div>
+              <div class="spec-item" *ngIf="selectedProduct.name.includes('PearPod')">
+                <span class="spec-label">Audio</span>
+                <span class="spec-value">Spatial Audio</span>
+              </div>
+              <!-- Generic specs for other products -->
+              <div class="spec-item" *ngIf="!selectedProduct.name.includes('PearBook') && 
+                                          !selectedProduct.name.includes('PearPhone') &&
+                                          !selectedProduct.name.includes('PearPad') && 
+                                          !selectedProduct.name.includes('Studio') &&
+                                          !selectedProduct.name.includes('PearPod')">
+                <span class="spec-label">Brand</span>
+                <span class="spec-value">Pear</span>
+              </div>
+              <div class="spec-item" *ngIf="!selectedProduct.name.includes('PearBook') && 
+                                          !selectedProduct.name.includes('PearPhone') &&
+                                          !selectedProduct.name.includes('PearPad') && 
+                                          !selectedProduct.name.includes('Studio') &&
+                                          !selectedProduct.name.includes('PearPod')">
+                <span class="spec-label">Availability</span>
+                <span class="spec-value">In Stock</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

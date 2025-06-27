@@ -10,6 +10,7 @@ public class OrderDTO {
     private Date date;
     private Double total;
     private List<OrderItemDTO> items;
+    private ShippingAddressDTO shippingAddress;
 
     public Long getId() {
         return id;
@@ -41,5 +42,13 @@ public class OrderDTO {
 
     public void setItems(List<OrderItemDTO> items) {
         this.items = items;
+    }
+
+    public ShippingAddressDTO getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(ShippingAddressDTO shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 }

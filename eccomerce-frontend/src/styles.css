@@ -1,3 +1,6 @@
+/* 🎨 PERA PHONE - SISTEMA TEMI */
+@import './styles/themes.css';
+
 /* Variabili globali - usate nelle diverse modalità */
 :root {
   --primary-color: #636d7a;        /* blu bootstrap */
