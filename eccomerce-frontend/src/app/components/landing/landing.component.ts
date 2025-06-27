@@ -87,19 +87,19 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     {
       title: "P1 NEURAL",
       subtitle: "ENGINE",
-      desc: "Revolutionary processing power that redefines mobile computing.",
+      desc: "Potenza di elaborazione rivoluzionaria che ridefinisce il computing mobile.",
       image: "../assets/images/p2-ultra.png",
     },
     {
       title: "LIQUID",
       subtitle: "RETINA",
-      desc: "13.6-inch display with unprecedented color accuracy and brightness.",
+      desc: "Display da 13,6 pollici con precisione cromatica e luminosità senza precedenti.",
       image: "../assets/images/macbook-display.png",
     },
     {
       title: "ULTRA",
-      subtitle: "PORTABLE",
-      desc: "Impossibly thin design that doesn't compromise on performance.",
+      subtitle: "PORTATILE",
+      desc: "Design incredibilmente sottile che non compromette le prestazioni.",
       image: "../assets/images/macbook-side.png",
     },
   ]
@@ -109,43 +109,43 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     {
       id: 1, // Database ID
       name: 'PEARBOOK AIR',
-      subtitle: 'NOTHING BUT PURE PERFORMANCE',
+      subtitle: 'NIENTE ALTRO CHE PURA PERFORMANCE',
       image: '../assets/images/macbook-air.png',
       specs: [
-        { label: "PROCESSOR", value: "P1 Neural Engine" },
-        { label: "MEMORY", value: "16GB Unified Memory" },
-        { label: "STORAGE", value: "512GB SSD" },
-        { label: "DISPLAY", value: "13.6-inch Liquid Retina" },
-        { label: "BATTERY", value: "22-hour all-day battery" },
-        { label: "WEIGHT", value: "1.24 kg" },
+        { label: "PROCESSORE", value: "P1 Neural Engine" },
+        { label: "MEMORIA", value: "16GB Memoria Unificata" },
+        { label: "ARCHIVIAZIONE", value: "512GB SSD" },
+        { label: "DISPLAY", value: "13,6 pollici Liquid Retina" },
+        { label: "BATTERIA", value: "22 ore di autonomia" },
+        { label: "PESO", value: "1,24 kg" },
       ]
     },
     {
       id: 4, // Database ID
       name: 'PEARPHONE 15',
-      subtitle: 'INNOVATION IN YOUR POCKET',
+      subtitle: 'INNOVAZIONE IN TASCA',
       image: '../assets/images/iphone16.png',
       specs: [
-        { label: "PROCESSOR", value: "A17 Pro Chip" },
-        { label: "MEMORY", value: "8GB RAM" },
-        { label: "STORAGE", value: "256GB Flash" },
-        { label: "DISPLAY", value: "6.7-inch Super Retina XDR" },
-        { label: "BATTERY", value: "29-hour video playback" },
-        { label: "WEIGHT", value: "240g" },
+        { label: "PROCESSORE", value: "Chip A17 Pro" },
+        { label: "MEMORIA", value: "8GB RAM" },
+        { label: "ARCHIVIAZIONE", value: "256GB Flash" },
+        { label: "DISPLAY", value: "6,7 pollici Super Retina XDR" },
+        { label: "BATTERIA", value: "29 ore riproduzione video" },
+        { label: "PESO", value: "240g" },
       ]
     },
     {
       id: 3, // Database ID
       name: 'PEARPAD PRO',
-      subtitle: 'CREATIVITY UNLEASHED',
+      subtitle: 'CREATIVITÀ SENZA LIMITI',
       image: '../assets/images/ipadpro.png',
       specs: [
-        { label: "PROCESSOR", value: "P2 Ultra Chip" },
-        { label: "MEMORY", value: "12GB Unified Memory" },
-        { label: "STORAGE", value: "1TB SSD" },
-        { label: "DISPLAY", value: "12.9-inch Liquid Retina XDR" },
-        { label: "BATTERY", value: "10-hour all-day battery" },
-        { label: "WEIGHT", value: "682g" },
+        { label: "PROCESSORE", value: "Chip P2 Ultra" },
+        { label: "MEMORIA", value: "12GB Memoria Unificata" },
+        { label: "ARCHIVIAZIONE", value: "1TB SSD" },
+        { label: "DISPLAY", value: "12,9 pollici Liquid Retina XDR" },
+        { label: "BATTERIA", value: "10 ore di autonomia" },
+        { label: "PESO", value: "682g" },
       ]
     }
   ];
@@ -179,49 +179,49 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       id: 1, // Database ID
       src: "../assets/images/macbook-air-mini.png",
       title: "PearBook Air",
-      subtitle: "13-inch MacBook Air",
+      subtitle: "MacBook Air da 13 pollici",
       price: 1299,
-      description: "Supercharged by the P1 Neural Engine"
+      description: "Potenziato dal P1 Neural Engine"
     },
     {
       id: 2, // Database ID
       src: "/assets/images/macbook-pro.png",
       title: "PearBook Pro",
-      subtitle: "14-inch MacBook Pro",
+      subtitle: "MacBook Pro da 14 pollici",
       price: 1999,
-      description: "Pro performance for demanding tasks"
+      description: "Prestazioni professionali per attività impegnative"
     },
     {
       id: 3, // Database ID
       src: "/assets/images/ipadpro-mini.png",
       title: "PearPad Pro",
-      subtitle: "12.9-inch iPad Pro",
+      subtitle: "iPad Pro da 12,9 pollici",
       price: 1099,
-      description: "The ultimate creative companion"
+      description: "Il compagno creativo definitivo"
     },
     {
       id: 4, // Database ID
       src: "/assets/images/iphone16-mini.png",
       title: "PearPhone 15",
-      subtitle: "6.7-inch Display",
+      subtitle: "Display da 6,7 pollici",
       price: 999,
-      description: "Innovation in your pocket"
+      description: "Innovazione in tasca"
     },
     {
       id: 5, // Database ID
       src: "/assets/images/applestudio-mini.png",
       title: "Studio Display",
-      subtitle: "27-inch 5K Display",
+      subtitle: "Display 5K da 27 pollici",
       price: 1599,
-      description: "Immersive viewing experience"
+      description: "Esperienza visiva coinvolgente"
     },
     {
       id: 6, // Database ID
       src: "/assets/images/airpods-mini.png",
       title: "PearPod Pro",
-      subtitle: "Wireless Earbuds",
+      subtitle: "Auricolari Wireless",
       price: 249,
-      description: "Spatial audio perfection"
+      description: "Perfezione audio spaziale"
     },
   ]
 
@@ -234,10 +234,10 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedProduct: any = null
 
   footerLinks = {
-    products: ["PearBook", "PearPad", "PearPhone", "Accessories"],
-    support: ["Contact", "Warranty", "Repairs", "Manuals"],
-    company: ["About", "Careers", "Press", "Investors"],
-    connect: ["Newsletter", "Community", "Social", "Events"],
+    products: ["PearBook", "PearPad", "PearPhone", "Accessori"],
+    support: ["Contatti", "Garanzia", "Riparazioni", "Manuali"],
+    company: ["Chi Siamo", "Carriere", "Stampa", "Investitori"],
+    connect: ["Newsletter", "Community", "Social", "Eventi"],
   }
 
   ngOnInit() {
@@ -319,7 +319,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   formatTime(date: Date): string {
-    return date.toLocaleTimeString("en-US", {
+    return date.toLocaleTimeString("it-IT", {
       hour12: false,
       hour: "2-digit",
       minute: "2-digit",
@@ -328,7 +328,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   formatDate(date: Date): string {
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString("it-IT", {
       weekday: "short",
       day: "numeric",
     })
@@ -336,18 +336,18 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   formatFullDate(date: Date): string {
     return (
-      date.toLocaleDateString("en-US", {
+      date.toLocaleDateString("it-IT", {
         day: "numeric",
         month: "long",
         year: "numeric",
       }) +
       ", " +
-      date.toLocaleTimeString("en-US", {
+      date.toLocaleTimeString("it-IT", {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
       }) +
-      " EST"
+      " CET"
     )
   }
 

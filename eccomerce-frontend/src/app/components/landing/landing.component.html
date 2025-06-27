@@ -71,9 +71,9 @@
   <section #productSection id="product" class="product-section fade-in">
     <div class="container">
       <div class="product-content">
-        <div class="badge">NEW ARRIVAL</div>
+        <div class="badge">NUOVO ARRIVO</div>
         <h1 class="product-title">PEARBOOK</h1>
-        <p class="product-subtitle">NOTHING BUT PURE PERFORMANCE.</p>
+        <p class="product-subtitle">NIENTE ALTRO CHE PURA PERFORMANCE.</p>
 
         <div class="product-image">
           <video autoplay muted playsinline src="../assets/images/large.mp4" alt="PearBook"></video>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="product-actions">
-          <button class="btn btn-primary" routerLink="/home" routerLinkActive="active">EXPLORE</button>
+          <button class="btn btn-primary" routerLink="/home" routerLinkActive="active">ESPLORA</button>
         </div>
       </div>
     </div>
@@ -112,8 +112,8 @@
     <div class="container">
       <div class="tech-content">
         <h2 class="tech-title">
-          TECHNICAL
-          <span class="tech-subtitle">SPECIFICATIONS</span>
+          SPECIFICHE
+          <span class="tech-subtitle">TECNICHE</span>
         </h2>
 
         <!-- Current Product Info -->
@@ -161,8 +161,8 @@
   <section #gallerySection id="gallery" class="gallery-section fade-in">
     <div class="container">
       <div class="gallery-header">
-        <h2 class="gallery-title">PRODUCT</h2>
-        <p class="gallery-subtitle">Experience the complete Pear ecosystem.</p>
+        <h2 class="gallery-title">PRODOTTI</h2>
+        <p class="gallery-subtitle">Scopri l'ecosistema completo Pear.</p>
       </div>
 
       <div class="gallery-grid">
@@ -191,7 +191,7 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4"/>
                     </svg>
-                    Add to Cart
+                    Aggiungi al Carrello
                   </button>
 
                   <button class="btn-quick-view" (click)="openQuickView(item)">
@@ -199,7 +199,7 @@
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                       <circle cx="12" cy="12" r="3"/>
                     </svg>
-                    Quick View
+                    Anteprima
                   </button>
                 </div>
               </div>
@@ -236,7 +236,7 @@
 
         <!-- Product Details -->
         <div class="quick-view-details">
-          <div class="quick-view-badge">PREMIUM COLLECTION</div>
+          <div class="quick-view-badge">COLLEZIONE PREMIUM</div>
           
           <h2 class="quick-view-title">{{ selectedProduct.title }}</h2>
           <p class="quick-view-subtitle">{{ selectedProduct.subtitle }}</p>
@@ -251,47 +251,47 @@
 
           <!-- Product Features -->
           <div class="quick-view-features">
-            <h4>Key Features</h4>
+            <h4>Caratteristiche Principali</h4>
             <ul>
               <li *ngIf="selectedProduct.title.includes('PearBook')">
                 <span class="feature-icon">⚡</span>
-                P1 Neural Engine for lightning-fast performance
+                P1 Neural Engine per prestazioni fulminee
               </li>
               <li *ngIf="selectedProduct.title.includes('PearBook')">
                 <span class="feature-icon">🖥️</span>
-                Liquid Retina display with True Tone technology
+                Display Liquid Retina con tecnologia True Tone
               </li>
               <li *ngIf="selectedProduct.title.includes('PearPhone')">
                 <span class="feature-icon">📱</span>
-                A17 Pro chip with advanced camera system
+                Chip A17 Pro con sistema fotocamera avanzato
               </li>
               <li *ngIf="selectedProduct.title.includes('PearPhone')">
                 <span class="feature-icon">📸</span>
-                Pro camera system with 3x optical zoom
+                Sistema fotocamera Pro con zoom ottico 3x
               </li>
               <li *ngIf="selectedProduct.title.includes('PearPad')">
                 <span class="feature-icon">✏️</span>
-                Compatible with Pear Pencil (2nd generation)
+                Compatibile con Pear Pencil (2ª generazione)
               </li>
               <li *ngIf="selectedProduct.title.includes('PearPad')">
                 <span class="feature-icon">🎨</span>
-                Liquid Retina XDR display for creative work
+                Display Liquid Retina XDR per lavoro creativo
               </li>
               <li *ngIf="selectedProduct.title.includes('Studio')">
                 <span class="feature-icon">🖥️</span>
-                27-inch 5K Retina display with P3 wide color
+                Display 5K Retina da 27 pollici con colore P3 ampio
               </li>
               <li *ngIf="selectedProduct.title.includes('Studio')">
                 <span class="feature-icon">🔊</span>
-                Built-in speakers with spatial audio
+                Altoparlanti integrati con audio spaziale
               </li>
               <li *ngIf="selectedProduct.title.includes('PearPod')">
                 <span class="feature-icon">🎵</span>
-                Spatial Audio with dynamic head tracking
+                Audio Spaziale con tracciamento dinamico della testa
               </li>
               <li *ngIf="selectedProduct.title.includes('PearPod')">
                 <span class="feature-icon">🔋</span>
-                Up to 30 hours of listening time
+                Fino a 30 ore di ascolto
               </li>
             </ul>
           </div>
@@ -302,7 +302,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4"/>
               </svg>
-              Add to Cart
+              Aggiungi al Carrello
             </button>
             
             <button class="btn-buy-now" (click)="buyNow(selectedProduct)">
@@ -310,33 +310,33 @@
                 <path d="M9 12l2 2 4-4"/>
                 <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 9 4.03 9 9z"/>
               </svg>
-              {{ isUserLoggedIn ? 'Buy Now' : 'Login & Buy' }}
+              {{ isUserLoggedIn ? 'Acquista Ora' : 'Accedi e Acquista' }}
             </button>
           </div>
 
           <!-- Product Specs Preview -->
           <div class="quick-view-specs">
-            <h4>Specifications</h4>
+            <h4>Specifiche</h4>
             <div class="specs-grid">
               <div class="spec-item" *ngIf="selectedProduct.title.includes('PearBook')">
-                <span class="spec-label">Processor</span>
+                <span class="spec-label">Processore</span>
                 <span class="spec-value">P1 Neural Engine</span>
               </div>
               <div class="spec-item" *ngIf="selectedProduct.title.includes('PearBook')">
-                <span class="spec-label">Memory</span>
-                <span class="spec-value">16GB Unified</span>
+                <span class="spec-label">Memoria</span>
+                <span class="spec-value">16GB Unificata</span>
               </div>
               <div class="spec-item" *ngIf="selectedProduct.title.includes('PearPhone')">
                 <span class="spec-label">Display</span>
-                <span class="spec-value">6.7" Super Retina XDR</span>
+                <span class="spec-value">6,7" Super Retina XDR</span>
               </div>
               <div class="spec-item" *ngIf="selectedProduct.title.includes('PearPhone')">
-                <span class="spec-label">Storage</span>
+                <span class="spec-label">Archiviazione</span>
                 <span class="spec-value">256GB</span>
               </div>
               <div class="spec-item" *ngIf="selectedProduct.title.includes('PearPad')">
                 <span class="spec-label">Display</span>
-                <span class="spec-value">12.9" Liquid Retina XDR</span>
+                <span class="spec-value">12,9" Liquid Retina XDR</span>
               </div>
               <div class="spec-item" *ngIf="selectedProduct.title.includes('PearPad')">
                 <span class="spec-label">Chip</span>

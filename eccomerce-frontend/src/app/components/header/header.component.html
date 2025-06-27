@@ -45,14 +45,14 @@
         <!-- Pulsante toggle modalità -->
         <li class="nav-item">
           <button (click)="toggleTheme()" class="btn btn-outline-primary ms-3">
-            {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+            {{ isDarkMode ? '🌞' : '🌛' }}
           </button>
         </li>
 
         <!-- Se ospite -->
         <ng-template #guestTemplate>
           <li class="nav-item">
-            <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
+            <a routerLink="/login" routerLinkActive="active" class="nav-link">Accedi</a>
           </li>
           <li class="nav-item">
             <a routerLink="/register" routerLinkActive="active" class="nav-link">Registrati</a>
